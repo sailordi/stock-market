@@ -1,7 +1,5 @@
 # stock-market
 
-# stock_market
-
 ## Instructions
     Develop an app that will simulate a real-time stock market. For developing purpose, we provided you with a server providing you mock stock data in the resources. You should fetch all the data in real-time and choose 20 stocks to monitor. The objectives of this exercise are to practice fetching data in real-time, visualizing custom widgets in real-time, and implementing authentication and authorization services.
     
@@ -24,6 +22,7 @@
     Choose 20 stocks to monitor and display their data within the application.
 
 Make sure to manage states using one of the following patterns:
+
     BLoC (Business Logic Component)
     Provider
     MVC (Model-View-Controller)
