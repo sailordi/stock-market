@@ -1,5 +1,5 @@
 
-enum Action{buy,sell}
+enum Action{buy,sell,deposit}
 
 class Transaction {
   final int userId;
@@ -7,12 +7,12 @@ class Transaction {
   final DateTime timeStamp;
   final Action action;
   final double amount;
-  final double price;
+  final double? price;
 
   Transaction({required this.userId,required this.ticker,required this.timeStamp,required this.action,required this.amount,required this.price});
 
   double result(double current) {
-    return price -current;
+    return price! -current;
   }
 
 
