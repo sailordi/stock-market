@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_market/firebase_options.dart';
-import 'package:stock_market/views/auth/loginView.dart';
-import 'package:stock_market/views/auth/registerView.dart';
+import 'package:stock_market/helper/myTheme.dart';
+import 'package:stock_market/views/auth/authView.dart';
 import 'package:stock_market/views/profile/profileView.dart';
 import 'package:stock_market/views/stocks/stockView.dart';
 import 'package:stock_market/views/stocks/stocksView.dart';
@@ -23,14 +23,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Stock market',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      initialRoute: "/",
+      theme: MyTheme.lightMode(),
+      darkTheme: MyTheme.darkMode(),
       routes: {
-        "/": (context) => const LoginView(),
-        "/register": (context) => const RegisterView(),
+        "/": (context) => const AuthView(),
         "/profile": (context) => const ProfileView(),
         "/stock": (context) => const StockView(),
         "/stocks": (context) => const StocksView(),

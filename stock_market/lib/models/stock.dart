@@ -1,4 +1,4 @@
-import '../models/transaction.dart';
+import '../models/myTransaction.dart';
 
 
 class Stock {
@@ -6,7 +6,7 @@ class Stock {
   final String ticker;
   final String name;
   final double? invested;
-  final List<Transaction>? transactions;
+  final List<MyTransaction>? transactions;
 
   Stock({required this.userId,required this.ticker,required this.name,this.invested,this.transactions});
 
@@ -24,7 +24,7 @@ class Stock {
     }
     double ret = 0;
 
-    for(Transaction t in transactions!) {
+    for(MyTransaction t in transactions!) {
       ret += t.result(current);
     }
 
