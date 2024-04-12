@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../adapter/firebaseAdapter.dart';
 import '../../helper/helper.dart';
-import '../../widgets/myButton.dart';
-import '../../widgets/myTextField.dart';
+import '../../widgets/buttonWidget.dart';
+import '../../widgets/textFieldWidget.dart';
 
 class LoginView extends StatefulWidget {
   final void Function()? tap;
@@ -73,13 +73,13 @@ class _LoginViewState extends State<LoginView> {
               const Text("Stock market",style: TextStyle(fontSize: 20) ),
               const SizedBox(height: 50,),
               //Email
-              MyTextField(hint: "Email", controller: emailC),
+              TextFieldWidget(hint: "Email", controller: emailC),
               const SizedBox(height: 10,),
               //Password
-              MyTextField(hint: "Password", controller: passwordC,obscure: true),
+              TextFieldWidget(hint: "Password", controller: passwordC,obscure: true),
               const SizedBox(height: 25,),
               //Login
-              MyButton(text: "Login", tap: login),
+              ButtonWidget(text: "Login", tap: login),
               const SizedBox(height: 25,),
               //Register
               Row(

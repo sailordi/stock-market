@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'loginView.dart';
@@ -27,11 +28,25 @@ class _AuthViewState extends State<AuthView> {
 
   @override
   Widget build(BuildContext context) {
-    if(login) {
-      return LoginView(tap: switchView);
-    }else {
-      return RegisterView(tap: switchView);
-    }
+    return Scaffold(
+      body: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context,snapshot) {
+          if(snapshot.hasData) {
+            Navigator.pushNamed(context,"/stocks");
+            return const SizedBox();
+          } else {
+            if(login) {
+              return LoginView(tap: switchView);
+            }else {
+              return RegisterView(tap: switchView);
+            }
+
+          }
+
+        }
+      ),
+    );
 
   }
 

@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../adapter/firebaseAdapter.dart';
 import '../../helper/helper.dart';
-import '../../widgets/myButton.dart';
-import '../../widgets/myTextField.dart';
+import '../../widgets/buttonWidget.dart';
+import '../../widgets/textFieldWidget.dart';
 
 class RegisterView extends StatefulWidget{
   final void Function()? tap;
@@ -83,18 +83,18 @@ class _RegisterViewState extends State<RegisterView> {
               const Text("Stock market",style: TextStyle(fontSize: 20) ),
               const SizedBox(height: 50,),
               //Username
-              MyTextField(hint: "Username", controller: usernameC),
+              TextFieldWidget(hint: "Username", controller: usernameC),
               const SizedBox(height: 10,),
               //Email
-              MyTextField(hint: "Email", controller: emailC),
+              TextFieldWidget(hint: "Email", controller: emailC),
               const SizedBox(height: 10,),
               //Password
-              MyTextField(hint: "Password", controller: passwordC,obscure: true),
+              TextFieldWidget(hint: "Password", controller: passwordC,obscure: true),
               const SizedBox(height: 25,),
               //Password
-              MyTextField(hint: "Confirm password", controller: confirmPasswordC,obscure: true),
+              TextFieldWidget(hint: "Confirm password", controller: confirmPasswordC,obscure: true),
               const SizedBox(height: 25,),
-              MyButton(text: "Register", tap: register),
+              ButtonWidget(text: "Register", tap: register),
               const SizedBox(height: 25,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

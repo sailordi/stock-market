@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class MyTextField extends StatelessWidget {
+class TextFieldWidget extends StatelessWidget {
   final String hint;
   final bool obscure;
   final TextEditingController controller;
 
-  const MyTextField({super.key,required this.hint,this.obscure = false,required this.controller});
+  const TextFieldWidget({super.key,required this.hint,this.obscure = false,required this.controller});
 
   @override
   Widget build(BuildContext context) {
