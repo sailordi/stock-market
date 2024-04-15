@@ -23,12 +23,9 @@ class FirebaseAdapter {
       "id":id,
       "email":email,
       "username":username,
+      "balance": StartMoney,
+      "invested": 0.00
     });
-    DateTime time = DateTime.now();
-
-    MyTransaction t = MyTransaction(userId: id,timeStamp: time,action: Action.deposit,amount: StartMoney);
-
-    await addTransaction(t);
 
     return;
   }
@@ -44,17 +41,25 @@ class FirebaseAdapter {
     String name = "",email = u.email!;
     HashMap<String,Stock> stocks = HashMap();
 
-    DocumentSnapshot<Object?> userData = await userFromCol(id);
+    DocumentSnapshot<Object?> userData = await _userFromCol(id);
 
     name = userData.get("name");
+    balance = userData.get("balance");
+    invested = userData.get("invested");
 
     MyUser ret = MyUser(id: id,email: email,invested: invested,balance: balance,name:name,stocks: stocks);
 
-    //TODO Balance
-    //TODO Invested
     //TODO Stocks
 
     return ret;
+  }
+
+  Future<void> updateUser(MyUser u) async{
+    users.doc(u.id).update({
+      "balance":u.balance,
+      "invested":u.invested
+    });
+
   }
 
   Future<void> addTransaction(MyTransaction t) async {
@@ -63,16 +68,34 @@ class FirebaseAdapter {
       "time":t.timeStamp,
       "action":t.action.name,
       "amount":t.amount,
-      "ticker": t.ticker ?? "",
-      "stocks":t.stocks ?? 0,
-      "price": t.price ?? 0,
+      "ticker": t.ticker,
+      "stocks":t.stocks,
+      "price": t.price,
     });
-
-    return;
   }
 
-  Future<DocumentSnapshot<Object?> > userFromCol(String id) async {
+  Future<void> addStock(Stock s) async {
+    stocks.doc(s.ticker).set({
+      "userId":s.userId,
+      "ticker": s.ticker,
+      "invested":s.invested,
+      "stocks": s.stocks
+    });
+  }
+
+  Future<void> updateStock(Stock s) async {
+    stocks.doc(s.ticker).update({
+      "invested":s.invested,
+      "stocks": s.stocks
+    });
+  }
+
+  Future<DocumentSnapshot<Object?> > _userFromCol(String id) async {
     return users.doc(id).get();
+  }
+
+  void logOut() {
+    FirebaseAuth.instance.signOut();
   }
 
 }

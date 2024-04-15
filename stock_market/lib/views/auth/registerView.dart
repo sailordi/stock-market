@@ -59,7 +59,8 @@ class _RegisterViewState extends State<RegisterView> {
 
     try{
       firebaseA.register(usernameC.text,emailC.text,passwordC.text);
-      Navigator.pop(context);
+      firebaseA.login(emailC.text,passwordC.text);
+      Navigator.pushNamed(context,"/stocks");
     } on FirebaseAuthException catch(e) {
       Navigator.pop(context);
       Helper.messageToUser(e.code,context);

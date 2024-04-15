@@ -17,6 +17,13 @@ class _StocksViewState extends State<StocksView> {
     super.initState();
   }
 
+  void historyPage(String ticker) {
+    Navigator.pushNamed(context,
+        arguments: ticker,
+        "/stock"
+    );
+  }
+
   void buy(String ticker,double price) {
 
   }
@@ -37,7 +44,15 @@ class _StocksViewState extends State<StocksView> {
       body:ListView.builder(
           itemCount: tickers.length,
           itemBuilder: (context,index) {
-            return StockWidget(ticker: tickers[index],price: 0.0,buy: null,sell: null,);
+            return StockWidget(ticker: tickers[index],
+              history: () { historyPage(tickers[index]); },
+              buy: () {
+                buy(tickers[index],0.00);
+              },
+              sell: () {
+                sell(tickers[index],0.00);
+              }
+            );
           }
       ),
     );

@@ -1,19 +1,19 @@
 
-enum Action{buy,sell,deposit}
+enum MyAction{buy,sell}
 
 class MyTransaction {
   final String userId;
-  final String? ticker;
+  final String ticker;
   final DateTime timeStamp;
-  final Action action;
+  final MyAction action;
   final double amount;
-  final double? price;
-  final double? stocks;
+  final double price;
+  final double stocks;
 
-  MyTransaction({required this.userId,this.ticker,required this.timeStamp,required this.action,required this.amount,this.price,this.stocks});
+  MyTransaction({required this.userId,required this.ticker,required this.timeStamp,required this.action,required this.amount,required this.price,required this.stocks});
 
   double result(double current) {
-    return price! -current;
+    return price -current;
   }
 
 

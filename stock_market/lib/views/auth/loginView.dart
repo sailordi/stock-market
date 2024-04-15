@@ -50,6 +50,7 @@ class _LoginViewState extends State<LoginView> {
 
     try {
       firebaseA.login(emailC.text,passwordC.text);
+      Navigator.pushNamed(context,"/stocks");
     } on FirebaseAuthException catch(e) {
       Navigator.pop(context);
       Helper.messageToUser(e.code,context);
