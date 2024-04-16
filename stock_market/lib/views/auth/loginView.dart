@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../adapter/firebaseAdapter.dart';
@@ -80,7 +81,7 @@ class _LoginViewState extends State<LoginView> {
               TextFieldWidget(hint: "Password", controller: passwordC,obscure: true),
               const SizedBox(height: 25,),
               //Login
-              ButtonWidget(text: "Login", tap: login),
+              ExpandedButtonWidget(text: "Login", tap: login),
               const SizedBox(height: 25,),
               //Register
               Row(

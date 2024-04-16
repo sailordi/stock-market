@@ -95,7 +95,7 @@ class _RegisterViewState extends State<RegisterView> {
               //Password
               TextFieldWidget(hint: "Confirm password", controller: confirmPasswordC,obscure: true),
               const SizedBox(height: 25,),
-              ButtonWidget(text: "Register", tap: register),
+              ExpandedButtonWidget(text: "Register", tap: register),
               const SizedBox(height: 25,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

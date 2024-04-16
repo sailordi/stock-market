@@ -8,49 +8,43 @@ import 'package:stock_market/widgets/buttonWidget.dart';
 
 class StockWidget extends StatefulWidget {
   final String ticker;
-  final void Function()? buy;
-  final void Function()? sell;
+  final void Function(String ticker,double price)? buy;
+  final void Function(String ticker,double price)? sell;
   final void Function()? history;
   
   const StockWidget({super.key,required this.ticker,required this.history,required this.buy,required this.sell});
 
   @override
-  State<StockWidget> createState() => _StockWidgetState();
+  State<StockWidget> createState() => StockWidgetState();
 
 }
 
-class _StockWidgetState extends State<StockWidget> {
+class StockWidgetState extends State<StockWidget> {
   double price = 0.0;
-  late Timer? _timer;
 
   @override
   void initState() {
     super.initState();
 
-    _timer = Timer.periodic(const Duration(milliseconds: 200), (timer) {
-      getPrice();
-    });
+    getPrice();
 
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();  // Don't forget to cancel the timer to avoid memory leaks
-    super.dispose();
   }
 
   Future<void> getPrice() async {
     var data = await Helper.stockPrice(widget.ticker);
 
-    setState(() {
-      price = data["rate"];
-    });
+    if (mounted) {
+      setState(() {
+        price = data["rate"];
+      });
+    }
+
   }
 
   String formatNumber() {
     String ret = price.toStringAsFixed(2);
 
-    return ret;
+    return "$ret\$";
   }
 
   @override
@@ -82,9 +76,9 @@ class _StockWidgetState extends State<StockWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              StockButtonWidget (action: MyAction.buy,text: formatNumber(),tap:widget.buy),
+              StockButtonWidget (action: MyAction.buy,text: formatNumber(),tap:() { widget.buy!(widget.ticker,price); }  ),
               const SizedBox(width: 10,),
-              StockButtonWidget (action: MyAction.sell,text: formatNumber(),tap:widget.sell),
+              StockButtonWidget (action: MyAction.sell,text: formatNumber(),tap:() { widget.sell!(widget.ticker,price); } ),
               const SizedBox(width: 10,)
             ],
           ),
