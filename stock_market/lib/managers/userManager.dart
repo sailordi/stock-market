@@ -11,10 +11,13 @@ class UserManager extends StateNotifier<MyUser> {
   final StateNotifierProviderRef ref;
   final FirebaseAdapter firebaseA = FirebaseAdapter();
 
-  UserManager(this.ref) : super(MyUser.empty() );
+  UserManager(this.ref) : super(MyUser.empty() ) {
+    loadData();
+  }
 
   void loadData() async {
-    state = await firebaseA.userData();
+    //TODO real data state = await firebaseA.userData();
+    state = await firebaseA.mocUser();
   }
 
   void logOut() {

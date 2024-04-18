@@ -1,26 +1,178 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stock_market/helper/helper.dart';
+import 'package:tab_container/tab_container.dart';
 
-class ProfileView extends StatefulWidget {
+import '../../managers/userManager.dart';
+import '../../models/myUser.dart';
+import '../../models/stock.dart';
+import '../../widgets/stockListWidget.dart';
+
+class ProfileView extends ConsumerStatefulWidget {
   const ProfileView({super.key});
 
   @override
-  State<ProfileView> createState() => _ProfileViewState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _ProfileViewState();
 }
 
-class _ProfileViewState extends State<ProfileView> {
+class _ProfileViewState extends ConsumerState<ProfileView> with WidgetsBindingObserver, SingleTickerProviderStateMixin {
+  late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
+
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    //Save current state when the app becomes inactive
+    if (state == AppLifecycleState.inactive) {
+      ref.read(userManager.notifier).save();
+    }
+    super.didChangeAppLifecycleState(state);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+
+  dynamic userInfoSection(MyUser u) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            "Username: ${u.name}",
+            style: const TextStyle(fontSize: 15),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            "Email: ${u.email}",
+            style: const TextStyle(fontSize: 15),
+          ),
+        ),
+        const SizedBox(height: 20),
+      ],
+    );
+  }
+
+  dynamic userWalletData(MyUser u) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                "Balance: ${Helper.formatCurrency(u.balance)}",
+                style: const TextStyle(fontSize: 15),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                "Invested: ${Helper.formatCurrency(u.invested)}",
+                style: const TextStyle(fontSize: 15),
+              ),
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  dynamic activeStocks(List<Stock> s) {
+    if(s.isEmpty) {
+      return const SizedBox();
+    }
+    return  StockListWidget(stocks: s,);
+  }
+
+  dynamic inactiveStocks(List<Stock> s) {
+    if (s.isEmpty) {
+      return const SizedBox();
+    }
+    return StockListWidget(stocks: s,);
+  }
+
+  dynamic tabContainer(BuildContext context,List<Stock> active,List<Stock> inactive) {
+    return TabContainer(
+      controller: _tabController,
+      tabEdge: TabEdge.top,
+      tabsStart: 0.1,
+      tabsEnd: 0.9,
+      tabMaxLength: 100,
+      borderRadius: BorderRadius.circular(10),
+      tabBorderRadius: BorderRadius.circular(10),
+      childPadding: const EdgeInsets.all(20.0),
+      selectedTextStyle: const TextStyle(
+        color: Colors.blue,
+        fontSize: 15.0,
+      ),
+      unselectedTextStyle: const TextStyle(
+        color: Colors.black,
+        fontSize: 13.0,
+      ),
+      colors: [
+        Theme.of(context).colorScheme.primary,
+        Theme.of(context).colorScheme.primary,
+      ],
+      tabs: const [
+        Text('Active'),
+        Text('Inactive'),
+      ],
+      children: [
+        SizedBox(
+          height: MediaQuery.of(context).size.height-320,
+          child: activeStocks(active)
+        ),
+        SizedBox(
+            height: MediaQuery.of(context).size.height-320,
+            child: inactiveStocks(inactive)
+        ),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final data = ref.watch(userManager);
+    final tickers = data.stocks.keys;
+    List<Stock> active = [];
+    List<Stock> inactive = [];
+
+    if(tickers.isNotEmpty) {
+      active = data.stocks.values.where((s) => s.stocks > 0).toList();
+      inactive = data.stocks.values.where((s) => s.stocks <= 0).toList();
+    }
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Stock market: Profile"),
+        title: Text("Stock market: ${data.name}'s wallet"),
+      ),
+      body: ListView(
+        children: [
+          const SizedBox(height: 10),
+          userInfoSection(data),
+          userWalletData(data),
+          const SizedBox(height: 20,),
+          tabContainer(context,active,inactive)
+        ],
       ),
     );
 

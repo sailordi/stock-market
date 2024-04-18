@@ -59,4 +59,10 @@ class Helper {
 
   }
 
+  static String formatCurrency(double price,[int decimals = 2]) {
+    String ret = price.toStringAsFixed(decimals);
+
+    return "$ret\$";
+  }
+
 }

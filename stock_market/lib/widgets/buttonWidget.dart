@@ -69,8 +69,12 @@ class StockButtonWidget  extends StatelessWidget {
   final MyAction action;
   final String text;
   final void Function()? tap;
+  final double width;
 
-  const StockButtonWidget({super.key,required this.action,required this.text, required this.tap});
+  const StockButtonWidget({super.key,required this.action,required this.text, required this.tap,this.width = 100.0});
+
+  const StockButtonWidget.buy({super.key, required this.text, required this.tap,this.width = 100.0}) : action = MyAction.buy;
+  const StockButtonWidget.sell({super.key, required this.text, required this.tap,this.width = 100.0}) : action = MyAction.sell;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +83,7 @@ class StockButtonWidget  extends StatelessWidget {
     return GestureDetector(
           onTap: tap,
           child: Container(
-            width: 120.0,
+            width: width,
             decoration: BoxDecoration(
               color: c,
               borderRadius: BorderRadius.circular(12),
@@ -88,7 +92,7 @@ class StockButtonWidget  extends StatelessWidget {
             child: Text(text,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 15)
+                    fontWeight: FontWeight.bold, fontSize: 12)
             ),
           ),
       );

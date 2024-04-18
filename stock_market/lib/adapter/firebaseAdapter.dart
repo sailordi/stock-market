@@ -54,6 +54,53 @@ class FirebaseAdapter {
     return ret;
   }
 
+  Future<MyUser> mocUser() async {
+    String id = "thisIsMock";
+    String name = "Sai";
+    String email = "sailordi11@gmail.com";
+    double invested = 500.00;
+    double balance = StartMoney - invested;
+    HashMap<String,Stock> stocks = HashMap();
+    String ticker1 = "GOOG";
+    String ticker2 = "TSLA";
+    double price1 = 50.00;
+    double price2 = 40.00;
+    double price3 = 50.00;
+
+    MyTransaction t1 = MyTransaction.buy(userId: id, ticker: ticker1, amount: invested, price: price1, stocks: invested/price1);
+    MyTransaction t2 = MyTransaction.buy(userId: id, ticker: ticker2, amount: invested, price: price2, stocks: invested/price2);
+    MyTransaction t3 = MyTransaction.sell(userId: id, ticker: ticker2, amount: price3*t2.stocks, price: price3, stocks: t2.stocks);
+
+    List<MyTransaction> transactions1 = [];
+    List<MyTransaction> transactions2 = [];
+
+    transactions1.add(t1);
+    transactions2.add(t2);
+    transactions2.add(t3);
+
+    Stock s1 = Stock(
+        userId: id,
+        ticker: ticker1,
+        name: Stocks[ticker1]!,
+        stocks: t1.stocks,
+        invested: t1.amount,
+        transactions: transactions1
+    );
+    Stock s2 = Stock(
+        userId: id,
+        ticker: ticker2,
+        name: Stocks[ticker2]!,
+        stocks: 0,
+        invested: 0,
+        transactions: transactions2
+    );
+
+    stocks[ticker1] = s1;
+    stocks[ticker2] = s2;
+
+    return MyUser(name: name, email: email, invested: invested, balance: balance, stocks: stocks);
+  }
+
   Future<void> updateUser(MyUser u) async{
     users.doc(u.id).update({
       "balance":u.balance,

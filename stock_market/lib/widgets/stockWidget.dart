@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:stock_market/helper/helper.dart';
 import 'package:stock_market/models/myTransaction.dart';
 import 'package:stock_market/widgets/buttonWidget.dart';
@@ -41,12 +42,6 @@ class StockWidgetState extends State<StockWidget> {
 
   }
 
-  String formatNumber() {
-    String ret = price.toStringAsFixed(2);
-
-    return "$ret\$";
-  }
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -76,9 +71,9 @@ class StockWidgetState extends State<StockWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              StockButtonWidget (action: MyAction.buy,text: formatNumber(),tap:() { widget.buy!(widget.ticker,price); }  ),
+              StockButtonWidget.buy(text: Helper.formatCurrency(price),tap:() { widget.buy!(widget.ticker,price); }  ),
               const SizedBox(width: 10,),
-              StockButtonWidget (action: MyAction.sell,text: formatNumber(),tap:() { widget.sell!(widget.ticker,price); } ),
+              StockButtonWidget.sell(text: Helper.formatCurrency(price),tap:() { widget.sell!(widget.ticker,price); } ),
               const SizedBox(width: 10,)
             ],
           ),
