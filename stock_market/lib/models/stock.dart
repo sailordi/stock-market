@@ -1,6 +1,5 @@
 import '../models/myTransaction.dart';
 
-
 class Stock {
   final String userId;
   final String ticker;

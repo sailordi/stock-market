@@ -1,11 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:stock_market/helper/helper.dart';
-import 'package:stock_market/models/myTransaction.dart';
 import 'package:stock_market/widgets/buttonWidget.dart';
+
+import '../state/stockPriceState.dart';
 
 class StockWidget extends StatefulWidget {
   final String ticker;
@@ -16,31 +15,13 @@ class StockWidget extends StatefulWidget {
   const StockWidget({super.key,required this.ticker,required this.history,required this.buy,required this.sell});
 
   @override
-  State<StockWidget> createState() => StockWidgetState();
+  State<StockWidget> createState() => StockWidgetState(ticker: ticker);
 
 }
 
-class StockWidgetState extends State<StockWidget> {
-  double price = 0.0;
+class StockWidgetState extends StockPriceState<StockWidget> {
 
-  @override
-  void initState() {
-    super.initState();
-
-    getPrice();
-
-  }
-
-  Future<void> getPrice() async {
-    var data = await Helper.stockPrice(widget.ticker);
-
-    if (mounted) {
-      setState(() {
-        price = data["rate"];
-      });
-    }
-
-  }
+  StockWidgetState({required super.ticker});
 
   @override
   Widget build(BuildContext context) {

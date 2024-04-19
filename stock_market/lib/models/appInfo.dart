@@ -21,4 +21,6 @@ const Map<String,String> Stocks = {
   "PAYS":"Paysign, Inc."
 };
 
+const int REFRESH_TIME = 15000;
+
 const double StartMoney = 1000000.00;

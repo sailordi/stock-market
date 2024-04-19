@@ -65,4 +65,17 @@ class Helper {
     return "$ret\$";
   }
 
+  static void stockHistoryPage(BuildContext context,String ticker) {
+    Navigator.pushNamed(context,
+        arguments: ticker,
+        "/stock"
+    );
+  }
+
+  static Future<void> getPrice(String ticker,Function(double) set) async {
+    var data = await Helper.stockPrice(ticker);
+
+      set(data["rate"]);
+  }
+
 }

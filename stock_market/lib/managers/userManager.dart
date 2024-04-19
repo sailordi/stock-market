@@ -1,17 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:stock_market/adapter/firebaseAdapter.dart';
-import 'package:stock_market/models/myTransaction.dart';
-import 'package:stock_market/models/myUser.dart';
-import 'package:stock_market/models/stock.dart';
 
 import '../models/appInfo.dart';
+import '../adapter/firebaseAdapter.dart';
+import '../models/myTransaction.dart';
+import '../models/userModel.dart';
+import '../models/stock.dart';
 
-class UserManager extends StateNotifier<MyUser> {
+class UserManager extends StateNotifier<UserModel> {
   final StateNotifierProviderRef ref;
   final FirebaseAdapter firebaseA = FirebaseAdapter();
 
-  UserManager(this.ref) : super(MyUser.empty() ) {
+  UserManager(this.ref) : super(UserModel.empty() ) {
     loadData();
   }
 
@@ -25,35 +25,36 @@ class UserManager extends StateNotifier<MyUser> {
 
     save();
 
-    state = MyUser.empty();
+    state = UserModel.empty();
   }
 
   void save() {
-    if(state.update) {
-      firebaseA.updateUser(state);
-      state = state.copyWith(update: false);
+    if(state.data.update) {
+      firebaseA.updateUser(state.data);
+      state = state.copyWith(data:state.data.copyWith(update: false) );
     }
   }
 
   String buy(MyTransaction t) {
-    var u = state;
+    var uM = state;
+    var u = uM.data;
     String ticker = t.ticker;
 
-    if(state.balance <= 0) {
+    if(u.balance <= 0) {
       return "Balance is zero can't buy";
     }
-    if(state.balance-t.amount <= 0) {
+    if(u.balance-t.amount <= 0) {
       return "To little money to buy $ticker for ${t.amount}\$";
     }
 
     Stock s = Stock.empty(t.userId,ticker,Stocks[ticker]!);
     bool add = false;
 
-    if(!u.stocks.containsKey(ticker) ) {
-      u.stocks[ticker] = s;
+    if(!uM.stocks.containsKey(ticker) ) {
+      uM.stocks[ticker] = s;
       add = true;
     } else {
-      s = u.stocks[ticker]!;
+      s = uM.stocks[ticker]!;
     }
 
     s = s.copyWith(invested: s.invested+t.amount,stocks: s.stocks+t.stocks);
@@ -67,21 +68,25 @@ class UserManager extends StateNotifier<MyUser> {
 
     firebaseA.addTransaction(t);
 
-    u.stocks[ticker] = s;
+    uM.stocks[ticker] = s;
 
-    state = state.copyWith(balance: u.balance-t.amount,invested: u.invested + t.amount,stocks: u.stocks,update: true);
+    u = u.copyWith(balance: u.balance-t.amount,invested: u.invested + t.amount,update: true);
+
+    state = state.copyWith(data:u,stocks: uM.stocks);
 
     return "Bought ${t.stocks} $ticker for ${t.amount}\$";
   }
 
   String sell(MyTransaction t) {
-    var u = state;
+    var uM = state;
+    var u = uM.data;
+
     String ticker = t.ticker;
 
-    if(!u.stocks.containsKey(ticker) ) {
+    if(!uM.stocks.containsKey(ticker) ) {
       return "You have no stocks in $ticker";
     }
-    var s = u.stocks[ticker];
+    var s = uM.stocks[ticker];
 
     if(s!.stocks-t.stocks <= 0) {
       return "You only have ${s.stocks} of $ticker can not sell ${t.stocks} of $ticker";
@@ -92,13 +97,15 @@ class UserManager extends StateNotifier<MyUser> {
 
     s = s.copyWith(invested: s.invested-t.amount,stocks: s.stocks-t.stocks);
 
-    state = state.copyWith(invested: u.invested-t.amount,balance: u.balance+t.amount,stocks: u.stocks,update: true);
+    u = u.copyWith(invested: u.invested-t.amount,balance: u.balance+t.amount,update: true);
+
+    state = state.copyWith(data: u,stocks: uM.stocks);
 
     return "Sold ${t.stocks} $ticker for ${t.amount}\$";
   }
 
 }
 
-final userManager = StateNotifierProvider<UserManager,MyUser>((ref) {
+final userManager = StateNotifierProvider<UserManager,UserModel>((ref) {
   return UserManager(ref);
 });

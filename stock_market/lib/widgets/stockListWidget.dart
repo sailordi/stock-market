@@ -7,11 +7,10 @@ import 'package:stock_market/widgets/stockWidget.dart';
 
 import '../helper/helper.dart';
 import '../managers/userManager.dart';
+import '../models/appInfo.dart';
 import '../models/myTransaction.dart';
 import '../models/stock.dart';
 import 'buySellWidget.dart';
-
-const int TIME = 1500;
 
 class StockListWidget extends ConsumerStatefulWidget {
   final List<String>? tickers;
@@ -35,22 +34,24 @@ class _StockListWidgetState extends ConsumerState<StockListWidget> with WidgetsB
     super.initState();
 
     if(widget.tickers != null) {
+      _profileKeys = [];
       _stockKeys = List.generate(widget.tickers!.length, (index) => GlobalKey<StockWidgetState>() );
 
-      _timer = Timer.periodic(const Duration(milliseconds: TIME), (timer) {
+      _timer = Timer.periodic(const Duration(milliseconds: REFRESH_TIME), (timer) {
         _buySellWidgetState.currentState?.getPrice();
-        for (var key in _stockKeys!) {
+        for (var key in _stockKeys) {
           key.currentState?.getPrice();
         }
 
       });
     }
     else {
+      _stockKeys = [];
       _profileKeys = List.generate(widget.stocks!.length, (index) => GlobalKey<ProfileStockWidgetState>() );
 
-      _timer = Timer.periodic(const Duration(milliseconds: TIME), (timer) {
+      _timer = Timer.periodic(const Duration(milliseconds: REFRESH_TIME), (timer) {
         _buySellWidgetState.currentState?.getPrice();
-        for (var key in _profileKeys!) {
+        for (var key in _profileKeys) {
           key.currentState?.getPrice();
         }
       });
@@ -67,10 +68,10 @@ class _StockListWidgetState extends ConsumerState<StockListWidget> with WidgetsB
     super.didChangeAppLifecycleState(state);
   }
 
-  void historyPage(String ticker) {
+  void stockTransactionHistory(Stock s) {
     Navigator.pushNamed(context,
-        arguments: ticker,
-        "/stock"
+        arguments: s,
+        "/stockTransactions"
     );
   }
 
@@ -85,7 +86,7 @@ class _StockListWidgetState extends ConsumerState<StockListWidget> with WidgetsB
             Navigator.pop(context);
             return;
           }
-          final data = ref.watch(userManager);
+          final data = ref.watch(userManager).data;
           double am = double.parse(amount);
 
           MyTransaction t = MyTransaction.buy(
@@ -125,7 +126,7 @@ class _StockListWidgetState extends ConsumerState<StockListWidget> with WidgetsB
             Navigator.pop(context);
             return;
           }
-          final data = ref.watch(userManager);
+          final data = ref.watch(userManager).data;
           double am = double.parse(amount);
 
           MyTransaction t = MyTransaction.sell(
@@ -159,7 +160,7 @@ class _StockListWidgetState extends ConsumerState<StockListWidget> with WidgetsB
             return StockWidget(
                 key: _stockKeys[index],
                 ticker: data[index],
-                history: () { historyPage(data[index]); },
+                history: () { Helper.stockHistoryPage(context,data[index]); },
                 buy: buy,
                 sell: sell
             );
@@ -180,7 +181,7 @@ class _StockListWidgetState extends ConsumerState<StockListWidget> with WidgetsB
                 s: data[index],
                 buy: buy,
                 sell: sell,
-                history: () {} //TODO transaction history
+                history: () { stockTransactionHistory(data[index]); }
             );
           }
       );

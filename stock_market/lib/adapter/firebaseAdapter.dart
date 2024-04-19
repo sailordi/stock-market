@@ -2,10 +2,12 @@ import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../models/stock.dart';
-import '../../models/myTransaction.dart';
-import '../../models/appInfo.dart';
-import '../models/myUser.dart';
+
+import '../models/userData.dart';
+import '../models/stock.dart';
+import '../models/myTransaction.dart';
+import '../models/appInfo.dart';
+import '../models/userModel.dart';
 
 class FirebaseAdapter {
   CollectionReference users = FirebaseFirestore.instance.collection("users");
@@ -34,32 +36,30 @@ class FirebaseAdapter {
     await FirebaseAuth.instance.signInWithEmailAndPassword(email: user,password: password);
   }
 
-  Future<MyUser> userData() async {
+  Future<UserModel> userData() async {
     User u = FirebaseAuth.instance.currentUser!;
     String id = u.uid;
-    double balance = 0,invested = 0;
-    String name = "",email = u.email!;
+    String email = u.email!;
     HashMap<String,Stock> stocks = HashMap();
 
     DocumentSnapshot<Object?> userData = await _userFromCol(id);
 
-    name = userData.get("name");
-    balance = userData.get("balance");
-    invested = userData.get("invested");
+    UserData data = UserData(id: id,name: userData.get("name"), email: email, invested: userData.get("invested"), balance: userData.get("balance") );
 
-    MyUser ret = MyUser(id: id,email: email,invested: invested,balance: balance,name:name,stocks: stocks);
+    UserModel ret = UserModel(data: data, stocks: stocks, selectedStock: null, transactions: []);
 
-    //TODO Stocks
+    //TODO Fetch Stocks
 
     return ret;
   }
 
-  Future<MyUser> mocUser() async {
+  Future<UserModel> mocUser() async {
     String id = "thisIsMock";
     String name = "Sai";
     String email = "sailordi11@gmail.com";
-    double invested = 500.00;
-    double balance = StartMoney - invested;
+    double invested1 = 500.00;
+    double invested2 = 500.00;
+    double balance = StartMoney - (invested1+invested2);
     HashMap<String,Stock> stocks = HashMap();
     String ticker1 = "GOOG";
     String ticker2 = "TSLA";
@@ -67,8 +67,10 @@ class FirebaseAdapter {
     double price2 = 40.00;
     double price3 = 50.00;
 
-    MyTransaction t1 = MyTransaction.buy(userId: id, ticker: ticker1, amount: invested, price: price1, stocks: invested/price1);
-    MyTransaction t2 = MyTransaction.buy(userId: id, ticker: ticker2, amount: invested, price: price2, stocks: invested/price2);
+    UserData data = UserData(id: id,name: name, email: email, invested: invested1+invested2, balance: balance);
+
+    MyTransaction t1 = MyTransaction.buy(userId: id, ticker: ticker1, amount: invested1, price: price1, stocks: invested1/price1);
+    MyTransaction t2 = MyTransaction.buy(userId: id, ticker: ticker2, amount: invested2, price: price2, stocks: invested2/price2);
     MyTransaction t3 = MyTransaction.sell(userId: id, ticker: ticker2, amount: price3*t2.stocks, price: price3, stocks: t2.stocks);
 
     List<MyTransaction> transactions1 = [];
@@ -98,10 +100,10 @@ class FirebaseAdapter {
     stocks[ticker1] = s1;
     stocks[ticker2] = s2;
 
-    return MyUser(name: name, email: email, invested: invested, balance: balance, stocks: stocks);
+    return UserModel(data: data, stocks: stocks, selectedStock: null, transactions: []);
   }
 
-  Future<void> updateUser(MyUser u) async{
+  Future<void> updateUser(UserData u) async{
     users.doc(u.id).update({
       "balance":u.balance,
       "invested":u.invested

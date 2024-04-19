@@ -6,8 +6,9 @@ import 'package:stock_market/helper/helper.dart';
 import 'package:tab_container/tab_container.dart';
 
 import '../../managers/userManager.dart';
-import '../../models/myUser.dart';
 import '../../models/stock.dart';
+import '../../models/userData.dart';
+import '../../models/userModel.dart';
 import '../../widgets/stockListWidget.dart';
 
 class ProfileView extends ConsumerStatefulWidget {
@@ -42,8 +43,7 @@ class _ProfileViewState extends ConsumerState<ProfileView> with WidgetsBindingOb
     super.dispose();
   }
 
-
-  dynamic userInfoSection(MyUser u) {
+  dynamic userInfoSection(UserData u) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -67,7 +67,7 @@ class _ProfileViewState extends ConsumerState<ProfileView> with WidgetsBindingOb
     );
   }
 
-  dynamic userWalletData(MyUser u) {
+  dynamic userWalletData(UserData u) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -150,26 +150,26 @@ class _ProfileViewState extends ConsumerState<ProfileView> with WidgetsBindingOb
 
   @override
   Widget build(BuildContext context) {
-    final data = ref.watch(userManager);
-    final tickers = data.stocks.keys;
+    final uM = ref.watch(userManager);
+    final tickers = uM.stocks.keys;
     List<Stock> active = [];
     List<Stock> inactive = [];
 
     if(tickers.isNotEmpty) {
-      active = data.stocks.values.where((s) => s.stocks > 0).toList();
-      inactive = data.stocks.values.where((s) => s.stocks <= 0).toList();
+      active = uM.stocks.values.where((s) => s.stocks > 0).toList();
+      inactive = uM.stocks.values.where((s) => s.stocks <= 0).toList();
     }
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Stock market: ${data.name}'s wallet"),
+        backgroundColor: Theme.of(context).colorScheme.background,
+        title: Text("Stock market: ${uM.data.name}'s wallet"),
       ),
       body: ListView(
         children: [
           const SizedBox(height: 10),
-          userInfoSection(data),
-          userWalletData(data),
+          userInfoSection(uM.data),
+          userWalletData(uM.data),
           const SizedBox(height: 20,),
           tabContainer(context,active,inactive)
         ],

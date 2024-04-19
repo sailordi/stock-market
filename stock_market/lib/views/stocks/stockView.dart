@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../helper/helper.dart';
+
 class StockView extends StatefulWidget {
   const StockView({super.key});
 
@@ -19,7 +21,7 @@ class _StockViewState extends State<StockView> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.background,
         title: const Text("Stock market: "),
       ),
     );

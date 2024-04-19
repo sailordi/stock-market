@@ -1,18 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:stock_market/helper/helper.dart';
-import 'package:stock_market/models/myTransaction.dart';
-import 'package:stock_market/widgets/buySellWidget.dart';
-import 'package:stock_market/widgets/stockListWidget.dart';
-
+import '../../helper/helper.dart';
+import '../../widgets/stockListWidget.dart';
 import '../../managers/userManager.dart';
 import '../../models/appInfo.dart';
-import '../../widgets/stockWidget.dart';
-
-const int TIME = 15000;
 
 class StocksView extends ConsumerStatefulWidget {
   const StocksView({super.key});
@@ -31,17 +23,16 @@ class _StocksViewState extends ConsumerState<StocksView> with WidgetsBindingObse
     w = StockListWidget(tickers: Stocks.keys.toList(),);
   }
 
-
   dynamic userData() {
-    final data = ref.watch(userManager);
+    final uM = ref.watch(userManager);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("Balance: ${Helper.formatCurrency(data.balance)}",
+        Text("Balance: ${Helper.formatCurrency(uM.data.balance)}",
             style: const TextStyle(fontSize: 20),
         ),
-        Text("Invested: ${Helper.formatCurrency(data.invested)}",
+        Text("Invested: ${Helper.formatCurrency(uM.data.invested)}",
           style: const TextStyle(fontSize: 20),
         ),
       ],
@@ -53,7 +44,7 @@ class _StocksViewState extends ConsumerState<StocksView> with WidgetsBindingObse
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Theme.of(context).colorScheme.background,
         title: const Text("Stock market: stocks"),
       ),
       body: Column(

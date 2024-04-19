@@ -7,6 +7,7 @@ import 'package:stock_market/views/auth/authView.dart';
 import 'package:stock_market/views/profile/profileView.dart';
 import 'package:stock_market/views/stocks/stockView.dart';
 import 'package:stock_market/views/stocks/stocksView.dart';
+import 'package:stock_market/views/transactions/stockTransactionHistoryView.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +26,7 @@ void main() async{
             "/profile": (context) => const ProfileView(),
             "/stock": (context) => const StockView(),
             "/stocks": (context) => const StocksView(),
+            "/stockTransactions": (context) => const StockTransactionHistoryView()
           },
           debugShowCheckedModeBanner: false,
         )
