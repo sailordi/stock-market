@@ -8,7 +8,6 @@ import 'package:tab_container/tab_container.dart';
 import '../../managers/userManager.dart';
 import '../../models/stock.dart';
 import '../../models/userData.dart';
-import '../../models/userModel.dart';
 import '../../widgets/stockListWidget.dart';
 
 class ProfileView extends ConsumerStatefulWidget {

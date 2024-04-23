@@ -1,7 +1,3 @@
-import 'dart:collection';
-
-import '../models/stock.dart';
-
 class UserData {
   final String? id;
   final String name;

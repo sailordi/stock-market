@@ -14,6 +14,7 @@ class FirebaseAdapter {
   CollectionReference stocks = FirebaseFirestore.instance.collection("stocks");
   CollectionReference transactions = FirebaseFirestore.instance.collection("transactions");
 
+
   FirebaseAdapter();
 
   Future<void> register(String username,String email,String password) async {
@@ -46,7 +47,7 @@ class FirebaseAdapter {
 
     UserData data = UserData(id: id,name: userData.get("name"), email: email, invested: userData.get("invested"), balance: userData.get("balance") );
 
-    UserModel ret = UserModel(data: data, stocks: stocks, selectedStock: null, transactions: []);
+    UserModel ret = UserModel(data: data, stocks: stocks, selectedStock: null, transactions: [],stockPrice: 0.00);
 
     //TODO Fetch Stocks
 
@@ -64,29 +65,15 @@ class FirebaseAdapter {
     String ticker1 = "GOOG";
     String ticker2 = "TSLA";
     double price1 = 50.00;
-    double price2 = 40.00;
-    double price3 = 50.00;
 
     UserData data = UserData(id: id,name: name, email: email, invested: invested1+invested2, balance: balance);
-
-    MyTransaction t1 = MyTransaction.buy(userId: id, ticker: ticker1, amount: invested1, price: price1, stocks: invested1/price1);
-    MyTransaction t2 = MyTransaction.buy(userId: id, ticker: ticker2, amount: invested2, price: price2, stocks: invested2/price2);
-    MyTransaction t3 = MyTransaction.sell(userId: id, ticker: ticker2, amount: price3*t2.stocks, price: price3, stocks: t2.stocks);
-
-    List<MyTransaction> transactions1 = [];
-    List<MyTransaction> transactions2 = [];
-
-    transactions1.add(t1);
-    transactions2.add(t2);
-    transactions2.add(t3);
 
     Stock s1 = Stock(
         userId: id,
         ticker: ticker1,
         name: Stocks[ticker1]!,
-        stocks: t1.stocks,
-        invested: t1.amount,
-        transactions: transactions1
+        stocks:  invested1/price1,
+        invested: invested1,
     );
     Stock s2 = Stock(
         userId: id,
@@ -94,13 +81,38 @@ class FirebaseAdapter {
         name: Stocks[ticker2]!,
         stocks: 0,
         invested: 0,
-        transactions: transactions2
     );
 
     stocks[ticker1] = s1;
     stocks[ticker2] = s2;
 
-    return UserModel(data: data, stocks: stocks, selectedStock: null, transactions: []);
+    return UserModel(data: data, stocks: stocks, selectedStock: null, transactions: [],stockPrice: 0.00);
+  }
+
+  Future<List<MyTransaction> > mocTransactions(String userId,String ticker) async {
+    String ticker1 = "GOOG";
+    String ticker2 = "TSLA";
+    double invested1 = 500.00;
+    double invested2 = 500.00;
+    double price1 = 50.00;
+    double price2 = 40.00;
+    double price3 = 50.00;
+    List<MyTransaction> ret = [];
+
+    if(ticker == ticker1) {
+      MyTransaction t = MyTransaction.buy(userId: userId, ticker: ticker1, amount: invested1, price: price1, stocks: invested1/price1);
+
+      ret.add(t);
+    }
+    else {
+      MyTransaction t1 = MyTransaction.buy(userId: userId, ticker: ticker2, amount: invested2, price: price2, stocks: invested2/price2);
+      MyTransaction t2 = MyTransaction.sell(userId: userId, ticker: ticker2, amount: price3*t1.stocks, price: price3, stocks: t1.stocks);
+
+      ret.add(t1);
+      ret.add(t2);
+    }
+
+    return ret;
   }
 
   Future<void> updateUser(UserData u) async{

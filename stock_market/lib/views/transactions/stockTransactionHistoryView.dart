@@ -2,13 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:stock_market/models/stock.dart';
+import 'package:stock_market/models/userModel.dart';
+import 'package:stock_market/widgets/logoWidget.dart';
+import 'package:stock_market/widgets/transactionWidget.dart';
 
+import '../../widgets/buttonWidget.dart';
 import '../../helper/helper.dart';
 import '../../managers/userManager.dart';
-
 import '../../models/appInfo.dart';
-import '../../state/stockPriceState.dart';
+import '../../state/buySellState.dart';
+import '../../widgets/stockWidget.dart';
 
 class StockTransactionHistoryView extends ConsumerStatefulWidget{
   const StockTransactionHistoryView({super.key});
@@ -18,17 +21,8 @@ class StockTransactionHistoryView extends ConsumerStatefulWidget{
 
 }
 
-class _StockTransactionHistoryViewState extends StockPriceConsumerState<StockTransactionHistoryView> with WidgetsBindingObserver {
-  Stock? s;
+class _StockTransactionHistoryViewState extends BuySellWitTickerConsumerState<StockTransactionHistoryView> with WidgetsBindingObserver {
   late Timer _timer;
-
-  @override
-  void initState() {
-    super.initState();
-    _timer = Timer.periodic(const Duration(milliseconds: REFRESH_TIME), (timer) {
-      getPrice();
-    });
-  }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -39,34 +33,109 @@ class _StockTransactionHistoryViewState extends StockPriceConsumerState<StockTra
     super.didChangeAppLifecycleState(state);
   }
 
+  Future<void> stockData(String ticker) async {
+    await setTicker(ticker);
+  }
+
+  dynamic transactionList(TransactionList  data) {
+    return Flexible(
+      child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: data.length,
+          itemBuilder: (context,index) {
+            return StockTransactionWidget(t: data[index],);
+          }
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    s = ModalRoute.of(context)!.settings.arguments as Stock;
-    final data = ref.watch(userManager);
+    final m = ref.watch(userManager);
+    final stock = m.selectedStock!;
+    const buttonWidth = 160.0;
+    final transactions = m.transactions;
+    updatePrice(m.stockPrice);
 
-    setTicker(s!.ticker);
+    stockData(stock.ticker);
+
+    _timer = Timer.periodic(const Duration(milliseconds: REFRESH_TIME), (timer) {
+      buySellWidgetState.currentState?.getPrice();
+      getPrice();
+    });
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
-        title: Text("${s!.ticker} transaction data"),
+        title: Text("${stock.ticker} transaction data"),
       ),
       body: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Ticker: ${s!.ticker}"),
-              Text("Name: ${s!.name}"),
+              const SizedBox(width: 10,),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(ticker),
+                  const SizedBox(height: 3,),
+                  LogoWidget(ticker: ticker, history: () { Helper.stockHistoryPage(context, ticker); },tickerOverLogo: false,height: 90,),
+                  const SizedBox(height: 5,),
+                  Text("Stocks: ${stock.stocks}"),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Name: ${stock.name}"),
+                  Text("Invested: ${Helper.formatCurrency(stock.invested)}"),
+                ],
+              ),
+              const SizedBox(width: 10,),
             ],
           ),
+          const SizedBox(height: 20,),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Stocks: ${s!.stocks}"),
-              Text("Invested: ${Helper.formatCurrency(s!.invested)}"),
-              Text("Current price: ${Helper.formatCurrency(price)}"),
+              const SizedBox(width: 5,),
+              StockButtonWidget.buy(text: Helper.formatCurrency(price), tap: () { buy(ticker,price); },width: buttonWidth,),
+              StockButtonWidget.sell(text: Helper.formatCurrency(price), tap: () { buy(ticker,price); },width: buttonWidth,),
+              const SizedBox(width: 10,),
             ],
-          )
+          ),
+          const SizedBox(height: 20,),
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child:   const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(width: 10,),
+                Expanded(child: Text("Type",
+                  textAlign: TextAlign.center,
+                ) ),
+                Expanded(child: Text("DateTime",
+                  textAlign: TextAlign.center,
+                ) ),
+                Expanded(child: Text("Stocks",
+                  textAlign: TextAlign.center,
+                ) ),
+                Expanded(child: Text("Price",
+                  textAlign: TextAlign.center,
+                ) ),
+                Expanded(child: Text("Amount",
+                  textAlign: TextAlign.center,
+                ) ),
+                SizedBox(width: 10,),
+              ],
+            ),
+          ),
+          const SizedBox(height: 2,),
+          transactionList(transactions)
         ],
       ),
     );

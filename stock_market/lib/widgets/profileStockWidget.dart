@@ -1,10 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:stock_market/helper/helper.dart';
 import 'package:stock_market/widgets/buttonWidget.dart';
+import 'package:stock_market/widgets/logoWidget.dart';
 
 import '../models/stock.dart';
 import '../state/stockPriceState.dart';
@@ -34,25 +33,7 @@ class ProfileStockWidgetState extends StockPriceState<ProfileStockWidget> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SizedBox(width: 10,),
-          GestureDetector(
-            onTap: widget.history,
-            child:  Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(widget.s.ticker),
-                Container(
-                    width: 130,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/logos/${widget.s.ticker}_Logo.png'),
-                          fit: BoxFit.fill,
-                        )
-                    )
-                ),
-              ],
-            ),
-          ),
+          LogoWidget(ticker: ticker, history: widget.history),
           const SizedBox(width: 10,),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

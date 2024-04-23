@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io' show Platform;
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class Helper {
   static void circleDialog(BuildContext context) {
@@ -63,6 +65,12 @@ class Helper {
     String ret = price.toStringAsFixed(decimals);
 
     return "$ret\$";
+  }
+
+  static String formatTimeStamp(DateTime t) {
+    DateFormat formatter = DateFormat('dd-MM-yyyy HH:mm:ss');
+
+    return formatter.format(t);
   }
 
   static void stockHistoryPage(BuildContext context,String ticker) {
