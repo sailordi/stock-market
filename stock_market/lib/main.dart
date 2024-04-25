@@ -20,7 +20,7 @@ void main() async{
           title: 'Stock market',
           theme: MyTheme.lightMode(),
           darkTheme: MyTheme.darkMode(),
-          initialRoute: "/profile",
+          initialRoute: "/",
           routes: {
             "/": (context) => const AuthView(),
             "/profile": (context) => const ProfileView(),

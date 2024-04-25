@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 
 import '../models/userData.dart';
 import '../models/stock.dart';
@@ -11,45 +12,59 @@ import '../models/userModel.dart';
 
 class FirebaseAdapter {
   CollectionReference users = FirebaseFirestore.instance.collection("users");
-  CollectionReference stocks = FirebaseFirestore.instance.collection("stocks");
-  CollectionReference transactions = FirebaseFirestore.instance.collection("transactions");
 
+  CollectionReference _stocks(String userId) {
+    return users.doc(userId).collection("stocks");
+  }
+
+  CollectionReference _transactions(String userId,String ticker) {
+    return _stocks(userId).doc(ticker).collection("transactions");
+  }
 
   FirebaseAdapter();
 
   Future<void> register(String username,String email,String password) async {
-    UserCredential c = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
-    String id = c.user!.uid;
+    try {
+      UserCredential c = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+      String id = c.user!.uid;
 
+      users.doc(id).set({
+        "id":id,
+        "email":email,
+        "username":username,
+        "balance": StartMoney,
+        "invested": 0.00
+      });
 
-    users.doc(email).set({
-      "id":id,
-      "email":email,
-      "username":username,
-      "balance": StartMoney,
-      "invested": 0.00
-    });
-
-    return;
+    } on FirebaseAuthException catch(e) {
+      print("Exeption");
+      rethrow;
+    }
   }
 
   Future<void> login(String user,String password) async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(email: user,password: password);
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(email: user,password: password);
+    } on FirebaseAuthException catch(e) {
+      print("Exeption");
+      rethrow;
+    }
   }
 
   Future<UserModel> userData() async {
     User u = FirebaseAuth.instance.currentUser!;
     String id = u.uid;
     String email = u.email!;
-    HashMap<String,Stock> stocks = HashMap();
+    StockList stocks = StockList();
 
-    DocumentSnapshot<Object?> userData = await _userFromCol(id);
+    var doc = await _userData(id);
+    var userData = doc.data() as Map<String, dynamic>;
 
-    UserData data = UserData(id: id,name: userData.get("name"), email: email, invested: userData.get("invested"), balance: userData.get("balance") );
+    UserData data = UserData(id: id,name: userData["name"], email: email, invested: userData["invested"], balance: userData["balance"]);
+
+    stocks = await getStocks(id);
 
     UserModel ret = UserModel(data: data, stocks: stocks, selectedStock: null, transactions: [],stockPrice: 0.00);
-
-    //TODO Fetch Stocks
 
     return ret;
   }
@@ -124,39 +139,89 @@ class FirebaseAdapter {
   }
 
   Future<void> addTransaction(MyTransaction t) async {
-    transactions.add({
-      "userId":t.userId,
-      "time":t.timeStamp,
-      "action":t.action.name,
-      "amount":t.amount,
-      "ticker": t.ticker,
-      "stocks":t.stocks,
-      "price": t.price,
-    });
+    var doc = _transactions(t.userId,t.ticker).doc(_timestampToDb(t.timeStamp) );
+
+      await doc.set({
+        "action":t.action.name,
+        "amount":t.amount,
+        "stocks":t.stocks,
+        "price": t.price,
+      });
+
   }
 
   Future<void> addStock(Stock s) async {
-    stocks.doc(s.ticker).set({
-      "userId":s.userId,
-      "ticker": s.ticker,
-      "invested":s.invested,
-      "stocks": s.stocks
-    });
+    var doc = _stocks(s.userId).doc(s.ticker);
+
+      await doc.set({
+        "invested":s.invested,
+        "stocks": s.stocks
+      });
   }
 
   Future<void> updateStock(Stock s) async {
-    stocks.doc(s.ticker).update({
+    _stocks(s.userId).doc(s.ticker).update({
       "invested":s.invested,
       "stocks": s.stocks
     });
   }
 
-  Future<DocumentSnapshot<Object?> > _userFromCol(String id) async {
+  Future<StockList> getStocks(String userId) async {
+    var queryData = await _stocks(userId).get();
+    StockList ret = StockList();
+
+      for(var doc in queryData.docs) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        Stock s = Stock(userId: userId, ticker: doc.id, name: Stocks[doc.id]!,stocks: data["stocks"],invested: data["invested"]);
+
+        ret[s.ticker] = s;
+      }
+
+      return ret;
+  }
+
+  Future<TransactionList> getTransactions(String userId,String ticker) async {
+    var queryData = await _transactions(userId,ticker).get();
+    TransactionList ret = [];
+
+    for(var doc in queryData.docs) {
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      DateTime timeStamp = _timestampFromDb(doc.id);
+      MyAction action = (data["action"] == MyAction.buy.name) ? MyAction.buy: MyAction.sell;
+      MyTransaction t = MyTransaction(
+          userId: userId,
+          ticker: ticker,
+          timeStamp: timeStamp,
+          action: action,
+          amount: data["amount"],
+          price: data["price"],
+          stocks: data["stocks"]
+      );
+
+      ret.add(t);
+    }
+
+    return ret;
+  }
+
+  Future<DocumentSnapshot<Object?> > _userData(String id) async {
     return users.doc(id).get();
   }
 
   void logOut() {
     FirebaseAuth.instance.signOut();
+  }
+
+  String _timestampToDb(DateTime d) {
+    return d.toUtc().toString().replaceAll('-', '').replaceAll(':', '').replaceAll(' ', '').substring(0, 14);
+  }
+
+  DateTime _timestampFromDb(String d) {
+      // Define the format that matches the string
+      DateFormat format = DateFormat("yyyyMMddHHmmss");
+
+      // Use the format to parse the string
+      return format.parseUtc(d);
   }
 
 }

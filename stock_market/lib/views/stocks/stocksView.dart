@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../helper/helper.dart';
+import '../../widgets/drawerWidget.dart';
 import '../../widgets/stockListWidget.dart';
 import '../../managers/userManager.dart';
 import '../../models/appInfo.dart';
@@ -13,7 +14,7 @@ class StocksView extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _StocksViewState();
 }
 
-class _StocksViewState extends ConsumerState<StocksView> with WidgetsBindingObserver {
+class _StocksViewState extends ConsumerState<StocksView> {
   late StockListWidget w;
 
   @override
@@ -44,9 +45,10 @@ class _StocksViewState extends ConsumerState<StocksView> with WidgetsBindingObse
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Stock market: stocks"),
       ),
+      drawer: const DrawerWidget(),
       body: Column(
         children: [
           w,

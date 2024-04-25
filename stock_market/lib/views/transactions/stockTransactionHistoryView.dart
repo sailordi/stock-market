@@ -21,16 +21,13 @@ class StockTransactionHistoryView extends ConsumerStatefulWidget{
 
 }
 
-class _StockTransactionHistoryViewState extends BuySellWitTickerConsumerState<StockTransactionHistoryView> with WidgetsBindingObserver {
+class _StockTransactionHistoryViewState extends BuySellWitTickerConsumerState<StockTransactionHistoryView> {
   late Timer _timer;
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    //Save current state when the app becomes inactive
-    if (state == AppLifecycleState.inactive) {
-      ref.read(userManager.notifier).save();
-    }
-    super.didChangeAppLifecycleState(state);
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   Future<void> stockData(String ticker) async {
@@ -66,7 +63,7 @@ class _StockTransactionHistoryViewState extends BuySellWitTickerConsumerState<St
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text("${stock.ticker} transaction data"),
       ),
       body: Column(

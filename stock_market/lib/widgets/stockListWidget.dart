@@ -22,7 +22,7 @@ class StockListWidget extends ConsumerStatefulWidget {
 
 }
 
-class _StockListWidgetState extends BuySellConsumerState<StockListWidget> with WidgetsBindingObserver {
+class _StockListWidgetState extends BuySellConsumerState<StockListWidget> {
   late Timer _timer;
   late List<GlobalKey<StockWidgetState> > _stockKeys;
   late List<GlobalKey<ProfileStockWidgetState> > _profileKeys;
@@ -58,12 +58,9 @@ class _StockListWidgetState extends BuySellConsumerState<StockListWidget> with W
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    //Save current state when the app becomes inactive
-    if (state == AppLifecycleState.inactive) {
-      ref.read(userManager.notifier).save();
-    }
-    super.didChangeAppLifecycleState(state);
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   void stockTransactionHistory(Stock s,double price) {

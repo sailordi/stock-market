@@ -17,23 +17,13 @@ class ProfileView extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _ProfileViewState();
 }
 
-class _ProfileViewState extends ConsumerState<ProfileView> with WidgetsBindingObserver, SingleTickerProviderStateMixin {
+class _ProfileViewState extends ConsumerState<ProfileView> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-
     _tabController = TabController(length: 2, vsync: this);
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    //Save current state when the app becomes inactive
-    if (state == AppLifecycleState.inactive) {
-      ref.read(userManager.notifier).save();
-    }
-    super.didChangeAppLifecycleState(state);
   }
 
   @override
@@ -161,7 +151,7 @@ class _ProfileViewState extends ConsumerState<ProfileView> with WidgetsBindingOb
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text("Stock market: ${uM.data.name}'s wallet"),
       ),
       body: ListView(

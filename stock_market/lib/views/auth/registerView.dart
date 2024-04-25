@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../adapter/firebaseAdapter.dart';
 import '../../helper/helper.dart';
+import '../../managers/userManager.dart';
 import '../../widgets/buttonWidget.dart';
 import '../../widgets/textFieldWidget.dart';
 
-class RegisterView extends StatefulWidget{
+class RegisterView extends ConsumerStatefulWidget {
   final void Function()? tap;
 
   const RegisterView({super.key,this.tap});
 
   @override
-  State<RegisterView> createState() => _RegisterViewState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _RegisterViewState();
 }
 
-class _RegisterViewState extends State<RegisterView> {
-  final FirebaseAdapter  firebaseA = FirebaseAdapter();
+class _RegisterViewState extends ConsumerState<RegisterView> {
   final TextEditingController usernameC = TextEditingController();
   final TextEditingController emailC = TextEditingController();
   final TextEditingController passwordC = TextEditingController();
@@ -58,8 +58,7 @@ class _RegisterViewState extends State<RegisterView> {
     }
 
     try{
-      firebaseA.register(usernameC.text,emailC.text,passwordC.text);
-      firebaseA.login(emailC.text,passwordC.text);
+      await ref.read(userManager.notifier).register(usernameC.text,emailC.text,passwordC.text);
       Navigator.pushNamed(context,"/stocks");
     } on FirebaseAuthException catch(e) {
       Navigator.pop(context);
@@ -72,7 +71,7 @@ class _RegisterViewState extends State<RegisterView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -82,7 +81,7 @@ class _RegisterViewState extends State<RegisterView> {
             children: [
               //App name
               const Text("Stock market",style: TextStyle(fontSize: 20) ),
-              const SizedBox(height: 50,),
+              const SizedBox(height: 30,),
               //Username
               TextFieldWidget(hint: "Username", controller: usernameC),
               const SizedBox(height: 10,),
@@ -91,12 +90,12 @@ class _RegisterViewState extends State<RegisterView> {
               const SizedBox(height: 10,),
               //Password
               TextFieldWidget(hint: "Password", controller: passwordC,obscure: true),
-              const SizedBox(height: 25,),
+              const SizedBox(height: 15,),
               //Password
               TextFieldWidget(hint: "Confirm password", controller: confirmPasswordC,obscure: true),
-              const SizedBox(height: 25,),
+              const SizedBox(height: 15,),
               ExpandedButtonWidget(text: "Register", tap: register),
-              const SizedBox(height: 25,),
+              const SizedBox(height: 10,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

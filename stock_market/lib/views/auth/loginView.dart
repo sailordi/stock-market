@@ -1,23 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../adapter/firebaseAdapter.dart';
 import '../../helper/helper.dart';
+import '../../managers/userManager.dart';
 import '../../widgets/buttonWidget.dart';
 import '../../widgets/textFieldWidget.dart';
 
-class LoginView extends StatefulWidget {
+class LoginView extends ConsumerStatefulWidget {
   final void Function()? tap;
 
   const LoginView({super.key, this.tap});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
-  final FirebaseAdapter  firebaseA = FirebaseAdapter();
+class _LoginViewState extends ConsumerState<LoginView> {
   final TextEditingController emailC = TextEditingController();
   final TextEditingController passwordC = TextEditingController();
 
@@ -50,9 +50,10 @@ class _LoginViewState extends State<LoginView> {
     }
 
     try {
-      firebaseA.login(emailC.text,passwordC.text);
+      await ref.read(userManager.notifier).logIn(emailC.text,passwordC.text);
       Navigator.pushNamed(context,"/stocks");
     } on FirebaseAuthException catch(e) {
+      print("Exeption 2");
       Navigator.pop(context);
       Helper.messageToUser(e.code,context);
     }
@@ -63,7 +64,7 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -73,16 +74,16 @@ class _LoginViewState extends State<LoginView> {
             children: [
               //App name
               const Text("Stock market",style: TextStyle(fontSize: 20) ),
-              const SizedBox(height: 50,),
+              const SizedBox(height: 30,),
               //Email
               TextFieldWidget(hint: "Email", controller: emailC),
               const SizedBox(height: 10,),
               //Password
               TextFieldWidget(hint: "Password", controller: passwordC,obscure: true),
-              const SizedBox(height: 25,),
+              const SizedBox(height: 15,),
               //Login
               ExpandedButtonWidget(text: "Login", tap: login),
-              const SizedBox(height: 25,),
+              const SizedBox(height: 15,),
               //Register
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -19,7 +19,7 @@ class _StockViewState extends State<StockView> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Stock market: "),
       ),
     );

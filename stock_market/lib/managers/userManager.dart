@@ -11,20 +11,32 @@ class UserManager extends StateNotifier<UserModel> {
   final FirebaseAdapter firebaseA = FirebaseAdapter();
 
   UserManager(this.ref) : super(UserModel.empty() ) {
-    loadData();
+    //Todo enable for moc
+    // _loadData();
   }
 
-  void loadData() async {
-    //TODO real data state = await firebaseA.userData();
-    state = await firebaseA.mocUser();
+  Future<void> _loadData() async {
+    //TODO Real data
+    state = await firebaseA.userData();
+   //state = await firebaseA.mocUser();
   }
 
   void logOut() {
-    firebaseA.logOut();
-
     save();
 
     state = UserModel.empty();
+
+    firebaseA.logOut();
+  }
+
+  Future<void> logIn(String email,String password) async {
+    await firebaseA.login(email, password);
+    await _loadData();
+  }
+
+  Future<void> register(String username,String email,String password) async {
+    await firebaseA.register(username,email, password);
+    await logIn(email,password);
   }
 
   void save() {
@@ -123,7 +135,9 @@ class UserManager extends StateNotifier<UserModel> {
   }
 
   void selectStock(Stock s,double price) async {
-    var transactions = await firebaseA.mocTransactions(s.userId,s.ticker);
+    //TODO Real transaction
+    var transactions = await firebaseA.getTransactions(s.userId,s.ticker);
+    //var transactions = await firebaseA.mocTransactions(s.userId,s.ticker);
 
     state = state.copyWith(selectedStock: s,transactions: transactions,stockPrice: price);
   }
