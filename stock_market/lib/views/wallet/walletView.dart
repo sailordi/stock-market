@@ -10,14 +10,14 @@ import '../../models/stock.dart';
 import '../../models/userData.dart';
 import '../../widgets/stockListWidget.dart';
 
-class ProfileView extends ConsumerStatefulWidget {
-  const ProfileView({super.key});
+class WalletView extends ConsumerStatefulWidget {
+  const WalletView({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _ProfileViewState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _WalletViewState();
 }
 
-class _ProfileViewState extends ConsumerState<ProfileView> with SingleTickerProviderStateMixin {
+class _WalletViewState extends ConsumerState<WalletView> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override

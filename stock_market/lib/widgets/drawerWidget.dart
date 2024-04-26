@@ -54,7 +54,7 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                     onTap: () {
                       Navigator.pop(context);
 
-                      Navigator.pushNamed(context,"/profile");
+                      Navigator.pushNamed(context,"/wallet");
                     },
                   ),
                 )

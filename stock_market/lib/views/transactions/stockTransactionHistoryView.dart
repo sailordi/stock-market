@@ -6,6 +6,7 @@ import 'package:stock_market/models/userModel.dart';
 import 'package:stock_market/widgets/logoWidget.dart';
 import 'package:stock_market/widgets/transactionWidget.dart';
 
+import '../../models/stock.dart';
 import '../../widgets/buttonWidget.dart';
 import '../../helper/helper.dart';
 import '../../managers/userManager.dart';
@@ -23,6 +24,30 @@ class StockTransactionHistoryView extends ConsumerStatefulWidget{
 
 class _StockTransactionHistoryViewState extends BuySellWitTickerConsumerState<StockTransactionHistoryView> {
   late Timer _timer;
+  late Stock stock = Stock.empty("","","");
+  late TransactionList transactions = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final m = ref.watch(userManager);
+      stock = m.selectedStock!;
+      transactions = m.transactions;
+
+      updatePrice(m.stockPrice);
+
+      stockData(stock.ticker);
+
+      _timer = Timer.periodic(const Duration(milliseconds: REFRESH_TIME), (timer) {
+        buySellWidgetState.currentState?.getPrice();
+        getPrice();
+      });
+
+    });
+
+  }
 
   @override
   void dispose() {
@@ -48,18 +73,7 @@ class _StockTransactionHistoryViewState extends BuySellWitTickerConsumerState<St
 
   @override
   Widget build(BuildContext context) {
-    final m = ref.watch(userManager);
-    final stock = m.selectedStock!;
     const buttonWidth = 160.0;
-    final transactions = m.transactions;
-    updatePrice(m.stockPrice);
-
-    stockData(stock.ticker);
-
-    _timer = Timer.periodic(const Duration(milliseconds: REFRESH_TIME), (timer) {
-      buySellWidgetState.currentState?.getPrice();
-      getPrice();
-    });
 
     return Scaffold(
       appBar: AppBar(
@@ -69,23 +83,19 @@ class _StockTransactionHistoryViewState extends BuySellWitTickerConsumerState<St
       body: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(width: 10,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(ticker),
+                  Text("Name: ${stock.name}",),
                   const SizedBox(height: 3,),
                   LogoWidget(ticker: ticker, history: () { Helper.stockHistoryPage(context, ticker); },tickerOverLogo: false,height: 90,),
                   const SizedBox(height: 5,),
                   Text("Stocks: ${stock.stocks}"),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Name: ${stock.name}"),
+                  const SizedBox(height: 5,),
                   Text("Invested: ${Helper.formatCurrency(stock.invested)}"),
                 ],
               ),

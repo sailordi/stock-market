@@ -64,6 +64,7 @@ class _StockListWidgetState extends BuySellConsumerState<StockListWidget> {
   }
 
   void stockTransactionHistory(String ticker,double price) async {
+    print("Stock history: $ticker");
     await ref.read(userManager.notifier).selectStock(ticker,price);
 
     if(mounted) {

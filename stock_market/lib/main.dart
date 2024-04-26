@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stock_market/firebase_options.dart';
 import 'package:stock_market/helper/myTheme.dart';
 import 'package:stock_market/views/auth/authView.dart';
-import 'package:stock_market/views/profile/profileView.dart';
+import 'package:stock_market/views/wallet/walletView.dart';
 import 'package:stock_market/views/stocks/stockView.dart';
 import 'package:stock_market/views/stocks/stocksView.dart';
 import 'package:stock_market/views/transactions/stockTransactionHistoryView.dart';
@@ -23,7 +23,7 @@ void main() async{
           initialRoute: "/",
           routes: {
             "/": (context) => const AuthView(),
-            "/profile": (context) => const ProfileView(),
+            "/wallet": (context) => const WalletView(),
             "/stock": (context) => const StockView(),
             "/stocks": (context) => const StocksView(),
             "/stockTransactions": (context) => const StockTransactionHistoryView()
