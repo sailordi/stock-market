@@ -51,11 +51,14 @@ class _LoginViewState extends ConsumerState<LoginView> {
 
     try {
       await ref.read(userManager.notifier).logIn(emailC.text,passwordC.text);
-      Navigator.pushNamed(context,"/stocks");
+      if(mounted) {
+        Navigator.pop(context);
+      }
     } on FirebaseAuthException catch(e) {
-      print("Exeption 2");
-      Navigator.pop(context);
-      Helper.messageToUser(e.code,context);
+      if(mounted) {
+        Navigator.pop(context);
+        Helper.messageToUser(e.code,context);
+      }
     }
 
   }

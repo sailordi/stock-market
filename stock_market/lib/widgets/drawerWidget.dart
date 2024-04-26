@@ -13,17 +13,9 @@ class DrawerWidget extends ConsumerStatefulWidget {
 
 }
 
-class _DrawerWidgetState extends ConsumerState<DrawerWidget> with WidgetsBindingObserver {
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    //Save current state when the app becomes inactive
-    if (state == AppLifecycleState.inactive) {
-      ref.read(userManager.notifier).save();
-    }
-    super.didChangeAppLifecycleState(state);
-  }
+class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
 
-  @override
+   @override
   Widget build(BuildContext context) {
     return Drawer(
         backgroundColor: Theme.of(context).colorScheme.background,
@@ -33,7 +25,11 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> with WidgetsBinding
             Column(
               children: [
                 DrawerHeader(
-                    child: Image.asset("appLogo/logo.jpg")
+                    child: SizedBox(
+                      width: 1500,
+                      height: 100,
+                      child: Image.asset("assets/appLogo/logo.jpg"),
+                    )
                 ),
                 const SizedBox(height: 40,),
                 Padding(
@@ -74,6 +70,7 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> with WidgetsBinding
                 onTap: () {
                   Navigator.pop(context);
                   ref.read(userManager.notifier).logOut();
+                  Navigator.pushReplacementNamed(context,"/");
                 },
               ),
             )

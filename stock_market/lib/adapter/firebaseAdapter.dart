@@ -60,7 +60,7 @@ class FirebaseAdapter {
     var doc = await _userData(id);
     var userData = doc.data() as Map<String, dynamic>;
 
-    UserData data = UserData(id: id,name: userData["name"], email: email, invested: userData["invested"], balance: userData["balance"]);
+    UserData data = UserData(id: id,name: userData["username"], email: email, invested: userData["invested"], balance: userData["balance"]);
 
     stocks = await getStocks(id);
 
@@ -217,11 +217,23 @@ class FirebaseAdapter {
   }
 
   DateTime _timestampFromDb(String d) {
-      // Define the format that matches the string
-      DateFormat format = DateFormat("yyyyMMddHHmmss");
+    if (d.length != 14) {
+      throw const FormatException("The timestamp string must be exactly 14 characters long.");
+    }
 
-      // Use the format to parse the string
-      return format.parseUtc(d);
+    // Verify each component
+    int? year = int.tryParse(d.substring(0,4));
+    int? month = int.tryParse(d.substring(4,6));
+    int? day = int.tryParse(d.substring(6,8));
+    int? hour = int.tryParse(d.substring(8,10));
+    int? minute = int.tryParse(d.substring(10,12));
+    int? second = int.tryParse(d.substring(12,14));
+
+    if (year == null || month == null || day == null || hour == null || minute == null || second == null) {
+      throw const FormatException("Invalid date components in the string.");
+    }
+
+    return DateTime.utc(year, month, day, hour, minute, second);
   }
 
 }

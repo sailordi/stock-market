@@ -59,10 +59,14 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
 
     try{
       await ref.read(userManager.notifier).register(usernameC.text,emailC.text,passwordC.text);
-      Navigator.pushNamed(context,"/stocks");
+      if(mounted) {
+        Navigator.pop(context);
+      }
     } on FirebaseAuthException catch(e) {
-      Navigator.pop(context);
-      Helper.messageToUser(e.code,context);
+      if(mounted) {
+        Navigator.pop(context);
+        Helper.messageToUser(e.code, context);
+      }
     }
 
   }

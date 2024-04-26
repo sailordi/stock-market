@@ -40,7 +40,7 @@ class ProfileStockWidgetState extends StockPriceState<ProfileStockWidget> {
             children: [
               Row(
                 children: [
-                  Text(" Stocks: ${widget.s.stocks}"),
+                  Text(" Stocks: ${widget.s.stocks.toStringAsFixed(2)}"),
                 ],
               ),
               Row(

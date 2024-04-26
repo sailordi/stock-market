@@ -33,7 +33,9 @@ class _AuthViewState extends State<AuthView> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context,snapshot) {
           if(snapshot.hasData) {
-            Navigator.pushNamed(context,"/stocks");
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.pushNamed(context,"/stocks");
+            });
             return const SizedBox();
           } else {
             if(login) {

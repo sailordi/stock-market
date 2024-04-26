@@ -11,6 +11,41 @@ import '../widgets/buySellWidget.dart';
 abstract class BuySellConsumerState<T extends ConsumerStatefulWidget> extends ConsumerState<T> {
   final GlobalKey<BuySellWidgetState> buySellWidgetState = GlobalKey<BuySellWidgetState>();
 
+  void preformBuy(String id,String ticker,double price,double amount) async {
+    MyTransaction t = MyTransaction.buy(
+        userId:id,
+        ticker: ticker,
+        amount: amount,
+        price: price,
+        stocks: amount/price
+    );
+
+    String message = await ref.read(userManager.notifier).buy(t);
+
+    if(mounted) {
+      Helper.messageToUser(message,context);
+      Navigator.pop(context);
+    }
+  }
+
+  void preformSell(String id,String ticker,double price,double amount) async {
+    MyTransaction t = MyTransaction.sell(
+        userId:id,
+        ticker: ticker,
+        amount: amount*price,
+        price: price,
+        stocks: amount
+    );
+
+    String message = await ref.read(userManager.notifier).sell(t);
+
+    if(mounted) {
+      Helper.messageToUser(message,context);
+      Navigator.pop(context);
+    }
+
+  }
+
   void buy(String ticker,double price) {
     BuySellWidget w = BuySellWidget(
         key: buySellWidgetState,
@@ -25,18 +60,7 @@ abstract class BuySellConsumerState<T extends ConsumerStatefulWidget> extends Co
           final data = ref.watch(userManager).data;
           double am = double.parse(amount);
 
-          MyTransaction t = MyTransaction.buy(
-              userId:data.id!,
-              ticker: ticker,
-              amount: am,
-              price: price,
-              stocks: am/price
-          );
-
-          String message = ref.read(userManager.notifier).buy(t);
-
-          Helper.messageToUser(message,context);
-          Navigator.pop(context);
+          preformBuy(data.id!,ticker,price,am);
         }
     );
 
@@ -57,26 +81,11 @@ abstract class BuySellConsumerState<T extends ConsumerStatefulWidget> extends Co
             Navigator.pop(context);
             return;
           }
-          if(amount.isEmpty) {
-            Helper.messageToUser("No amount entered", context);
-            Navigator.pop(context);
-            return;
-          }
           final data = ref.watch(userManager).data;
           double am = double.parse(amount);
 
-          MyTransaction t = MyTransaction.sell(
-              userId:data.id!,
-              ticker: ticker,
-              amount: am*price,
-              price: price,
-              stocks: am
-          );
+          preformSell(data.id!,ticker,price,am);
 
-          String message = ref.read(userManager.notifier).sell(t);
-
-          Helper.messageToUser(message,context);
-          Navigator.pop(context);
         }
     );
 
@@ -91,6 +100,41 @@ abstract class BuySellConsumerState<T extends ConsumerStatefulWidget> extends Co
 abstract class BuySellWitTickerConsumerState<T extends ConsumerStatefulWidget> extends StockPriceConsumerState<T> {
   final GlobalKey<BuySellWidgetState> buySellWidgetState = GlobalKey<BuySellWidgetState>();
 
+  void preformBuy(String id,String ticker,double price,double amount) async {
+    MyTransaction t = MyTransaction.buy(
+        userId:id,
+        ticker: ticker,
+        amount: amount,
+        price: price,
+        stocks: amount/price
+    );
+
+    String message = await ref.read(userManager.notifier).buy(t);
+
+    if(mounted) {
+      Helper.messageToUser(message,context);
+      Navigator.pop(context);
+    }
+  }
+
+  void preformSell(String id,String ticker,double price,double amount) async {
+    MyTransaction t = MyTransaction.sell(
+        userId:id,
+        ticker: ticker,
+        amount: amount*price,
+        price: price,
+        stocks: amount
+    );
+
+    String message = await ref.read(userManager.notifier).sell(t);
+
+    if(mounted) {
+      Helper.messageToUser(message,context);
+      Navigator.pop(context);
+    }
+
+  }
+
   void buy(String ticker,double price) {
     BuySellWidget w = BuySellWidget(
         key: buySellWidgetState,
@@ -105,25 +149,13 @@ abstract class BuySellWitTickerConsumerState<T extends ConsumerStatefulWidget> e
           final data = ref.watch(userManager).data;
           double am = double.parse(amount);
 
-          MyTransaction t = MyTransaction.buy(
-              userId:data.id!,
-              ticker: ticker,
-              amount: am,
-              price: price,
-              stocks: am/price
-          );
-
-          String message = ref.read(userManager.notifier).buy(t);
-
-          Helper.messageToUser(message,context);
-          Navigator.pop(context);
+          preformBuy(data.id!,ticker,price,am);
         }
     );
 
     showDialog(context: context,
       builder: (context) => w,
     );
-
   }
 
   void sell(String ticker,double price) {
@@ -137,26 +169,11 @@ abstract class BuySellWitTickerConsumerState<T extends ConsumerStatefulWidget> e
             Navigator.pop(context);
             return;
           }
-          if(amount.isEmpty) {
-            Helper.messageToUser("No amount entered", context);
-            Navigator.pop(context);
-            return;
-          }
           final data = ref.watch(userManager).data;
           double am = double.parse(amount);
 
-          MyTransaction t = MyTransaction.sell(
-              userId:data.id!,
-              ticker: ticker,
-              amount: am*price,
-              price: price,
-              stocks: am
-          );
+          preformSell(data.id!,ticker,price,am);
 
-          String message = ref.read(userManager.notifier).sell(t);
-
-          Helper.messageToUser(message,context);
-          Navigator.pop(context);
         }
     );
 
@@ -165,4 +182,5 @@ abstract class BuySellWitTickerConsumerState<T extends ConsumerStatefulWidget> e
     );
 
   }
+
 }

@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stock_market/models/userData.dart';
 
 import '../models/appInfo.dart';
 import '../adapter/firebaseAdapter.dart';
@@ -15,15 +16,11 @@ class UserManager extends StateNotifier<UserModel> {
     // _loadData();
   }
 
-  Future<void> _loadData() async {
-    //TODO Real data
+  Future<void> loadData() async {
     state = await firebaseA.userData();
-   //state = await firebaseA.mocUser();
   }
 
   void logOut() {
-    save();
-
     state = UserModel.empty();
 
     firebaseA.logOut();
@@ -31,7 +28,6 @@ class UserManager extends StateNotifier<UserModel> {
 
   Future<void> logIn(String email,String password) async {
     await firebaseA.login(email, password);
-    await _loadData();
   }
 
   Future<void> register(String username,String email,String password) async {
@@ -39,14 +35,7 @@ class UserManager extends StateNotifier<UserModel> {
     await logIn(email,password);
   }
 
-  void save() {
-    if(state.data.update) {
-      firebaseA.updateUser(state.data);
-      state = state.copyWith(data:state.data.copyWith(update: false) );
-    }
-  }
-
-  String buy(MyTransaction t) {
+  Future<String> buy(MyTransaction t) async {
     var uM = state;
     var u = uM.data;
     bool sel = false;
@@ -71,14 +60,6 @@ class UserManager extends StateNotifier<UserModel> {
 
     s = s.copyWith(invested: s.invested+t.amount,stocks: s.stocks+t.stocks);
 
-    if(add) {
-      firebaseA.addStock(s);
-    }
-    else {
-      firebaseA.updateStock(s);
-    }
-    firebaseA.addTransaction(t);
-
     if(uM.selectedStock != null && t.ticker == uM.selectedStock!.ticker) {
       uM.transactions.add(t);
       sel = true;
@@ -86,7 +67,16 @@ class UserManager extends StateNotifier<UserModel> {
 
     uM.stocks[ticker] = s;
 
-    u = u.copyWith(balance: u.balance-t.amount,invested: u.invested + t.amount,update: true);
+    u = u.copyWith(balance: u.balance-t.amount,invested: u.invested + t.amount);
+
+    await firebaseA.addTransaction(t);
+    if(add) {
+      await firebaseA.addStock(s);
+    }
+    else {
+      await firebaseA.updateStock(s);
+    }
+    await firebaseA.updateUser(u);
 
     if(!sel) {
       state = state.copyWith(data: u, stocks: uM.stocks);
@@ -97,7 +87,7 @@ class UserManager extends StateNotifier<UserModel> {
     return "Bought ${t.stocks} $ticker for ${t.amount}\$";
   }
 
-  String sell(MyTransaction t) {
+  Future<String>  sell(MyTransaction t) async {
     var uM = state;
     var u = uM.data;
     bool sel = false;
@@ -112,8 +102,6 @@ class UserManager extends StateNotifier<UserModel> {
     if(s!.stocks-t.stocks <= 0) {
       return "You only have ${s.stocks} of $ticker can not sell ${t.stocks} of $ticker";
     }
-    firebaseA.addTransaction(t);
-
     s = s.copyWith(invested: s.invested-t.amount,stocks: s.stocks-t.stocks);
 
     if(uM.selectedStock != null && t.ticker == uM.selectedStock!.ticker) {
@@ -122,8 +110,11 @@ class UserManager extends StateNotifier<UserModel> {
     }
 
     s = s.copyWith(invested: s.invested-t.amount,stocks: s.stocks-t.stocks);
+    u = u.copyWith(invested: u.invested-t.amount,balance: u.balance+t.amount);
 
-    u = u.copyWith(invested: u.invested-t.amount,balance: u.balance+t.amount,update: true);
+    await firebaseA.addTransaction(t);
+    await firebaseA.updateStock(s);
+    await firebaseA.updateUser(u);
 
     if(!sel) {
       state = state.copyWith(data: u, stocks: uM.stocks);
@@ -134,12 +125,12 @@ class UserManager extends StateNotifier<UserModel> {
     return "Sold ${t.stocks} $ticker for ${t.amount}\$";
   }
 
-  void selectStock(Stock s,double price) async {
+  Future<void> selectStock(String ticker,double price) async {
     //TODO Real transaction
-    var transactions = await firebaseA.getTransactions(s.userId,s.ticker);
+    var transactions = await firebaseA.getTransactions(state.data.id!,ticker);
     //var transactions = await firebaseA.mocTransactions(s.userId,s.ticker);
 
-    state = state.copyWith(selectedStock: s,transactions: transactions,stockPrice: price);
+    state = state.copyWith(selectedStock: state.stocks[ticker],transactions: transactions,stockPrice: price);
   }
 
 }

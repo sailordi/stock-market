@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stock_market/models/userData.dart';
 
 import '../../helper/helper.dart';
 import '../../widgets/drawerWidget.dart';
@@ -49,11 +50,26 @@ class _StocksViewState extends ConsumerState<StocksView> {
         title: const Text("Stock market: stocks"),
       ),
       drawer: const DrawerWidget(),
-      body: Column(
-        children: [
-          w,
-          userData()
-        ],
+      body: FutureBuilder<void> (
+        future: ref.read(userManager.notifier).loadData(),
+        builder: (context,snapshot) {
+          if(snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          else if(snapshot.hasError) {
+            return Center(
+              child: Text("Error: This is bad -> ${snapshot.error}"),
+            );  
+          }
+          return  Column(
+            children: [
+              w,
+              userData()
+            ],
+          );
+        }
       )
     );
   }

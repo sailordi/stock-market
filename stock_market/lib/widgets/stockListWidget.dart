@@ -63,12 +63,13 @@ class _StockListWidgetState extends BuySellConsumerState<StockListWidget> {
     super.dispose();
   }
 
-  void stockTransactionHistory(Stock s,double price) {
-    ref.read(userManager.notifier).selectStock(s,price);
+  void stockTransactionHistory(String ticker,double price) async {
+    await ref.read(userManager.notifier).selectStock(ticker,price);
 
-    Navigator.pushNamed(context,
-        "/stockTransactions"
-    );
+    if(mounted) {
+      Navigator.pushNamed(context,"/stockTransactions");
+    }
+
   }
 
   dynamic stocksWidget() {
@@ -103,7 +104,7 @@ class _StockListWidgetState extends BuySellConsumerState<StockListWidget> {
                 s: data[index],
                 buy: buy,
                 sell: sell,
-                history: () { stockTransactionHistory(data[index],_profileKeys[index].currentState!.price); }
+                history: () { stockTransactionHistory(data[index].ticker,_profileKeys[index].currentState!.price); }
             );
           }
       );
