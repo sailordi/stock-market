@@ -35,17 +35,17 @@ class UserManager extends StateNotifier<UserModel> {
     await logIn(email,password);
   }
 
-  Future<String> buy(MyTransaction t) async {
+  Future<(bool,String)> buy(MyTransaction t) async {
     var uM = state;
     var u = uM.data;
     bool sel = false;
     String ticker = t.ticker;
 
     if(u.balance <= 0) {
-      return "Balance is zero can't buy";
+      return (true,"Balance is zero can't buy");
     }
     if(u.balance-t.amount <= 0) {
-      return "To little money to buy $ticker for ${t.amount}\$";
+      return (true,"To little money to buy $ticker for ${t.amount}\$");
     }
 
     Stock s = Stock.empty(t.userId,ticker,Stocks[ticker]!);
@@ -84,10 +84,10 @@ class UserManager extends StateNotifier<UserModel> {
       state = state.copyWith(data: u, stocks: uM.stocks,selectedStock: s,transactions: uM.transactions);
     }
 
-    return "Bought ${t.stocks} $ticker for ${t.amount}\$";
+    return (false,"Bought ${t.stocks} $ticker for ${t.amount}\$");
   }
 
-  Future<String>  sell(MyTransaction t) async {
+  Future<(bool,String)>  sell(MyTransaction t) async {
     var uM = state;
     var u = uM.data;
     bool sel = false;
@@ -95,22 +95,28 @@ class UserManager extends StateNotifier<UserModel> {
     String ticker = t.ticker;
 
     if(!uM.stocks.containsKey(ticker) ) {
-      return "You have no stocks in $ticker";
+      return (true,"You have no stocks in $ticker");
     }
     var s = uM.stocks[ticker];
 
-    if(s!.stocks-t.stocks <= 0) {
-      return "You only have ${s.stocks} of $ticker can not sell ${t.stocks} of $ticker";
+    if(s!.stocks-t.stocks < 0) {
+      return  (true,"You only have ${s.stocks} of $ticker can not sell ${t.stocks} of $ticker");
     }
-    s = s.copyWith(invested: s.invested-t.amount,stocks: s.stocks-t.stocks);
+    double investedSt = s.invested-t.amount;
+    double investedU = u.invested-t.amount;
+    double stocks =  s.stocks-t.stocks;
+
+    if(investedSt < 0) { investedSt = 0; }
+    if(investedU < 0) { investedU = 0; }
+    if(stocks < 0)  { stocks = 0; }
 
     if(uM.selectedStock != null && t.ticker == uM.selectedStock!.ticker) {
       uM.transactions.add(t);
       sel = true;
     }
 
-    s = s.copyWith(invested: s.invested-t.amount,stocks: s.stocks-t.stocks);
-    u = u.copyWith(invested: u.invested-t.amount,balance: u.balance+t.amount);
+    s = s.copyWith(invested: investedSt,stocks: stocks);
+    u = u.copyWith(invested: investedU,balance: u.balance+t.amount);
 
     await firebaseA.addTransaction(t);
     await firebaseA.updateStock(s);
@@ -122,7 +128,7 @@ class UserManager extends StateNotifier<UserModel> {
       state = state.copyWith(data: u, stocks: uM.stocks,selectedStock: s,transactions: uM.transactions);
     }
 
-    return "Sold ${t.stocks} $ticker for ${t.amount}\$";
+    return  (false,"Sold ${t.stocks} $ticker for ${t.amount}\$");
   }
 
   Future<void> selectStock(String ticker,double price) async {

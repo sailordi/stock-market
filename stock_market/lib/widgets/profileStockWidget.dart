@@ -11,7 +11,7 @@ import '../state/stockPriceState.dart';
 class ProfileStockWidget extends StatefulWidget {
   final Stock s;
   final void Function(String ticker,double price)? buy;
-  final void Function(String ticker,double price)? sell;
+  final void Function(String ticker,double price,double stocks)? sell;
   final void Function()? history;
 
   const ProfileStockWidget({super.key,required this.s,required this.history,required this.buy,required this.sell});
@@ -63,7 +63,7 @@ class ProfileStockWidgetState extends StockPriceState<ProfileStockWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  StockButtonWidget.sell(text: Helper.formatCurrency(price),tap:() { widget.buy!(widget.s.ticker,price); },width: width,),
+                  StockButtonWidget.sell(text: Helper.formatCurrency(price),tap:() { widget.sell!(widget.s.ticker,price,widget.s.stocks); },width: width,),
                   const SizedBox(width: 10,),
                 ],
               ),

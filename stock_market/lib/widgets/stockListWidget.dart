@@ -75,6 +75,8 @@ class _StockListWidgetState extends BuySellConsumerState<StockListWidget> {
 
   dynamic stocksWidget() {
     List<String> data = widget.tickers!;
+    var uM = ref.watch(userManager);
+    var stocks = uM.stocks;
 
     return Flexible(
       child: ListView.builder(
@@ -86,7 +88,8 @@ class _StockListWidgetState extends BuySellConsumerState<StockListWidget> {
                 ticker: data[index],
                 history: () { Helper.stockHistoryPage(context,data[index]); },
                 buy: buy,
-                sell: sell
+                sell: sell,
+                stocks: (stocks.containsKey(data[index]) ) ? stocks[data[index]]!.stocks : 0.00
             );
           }
       ),

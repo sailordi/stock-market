@@ -7,9 +7,10 @@ import '../helper/helper.dart';
 class BuySellWidget extends StatefulWidget {
   final MyAction action;
   final String ticker;
+  final double stocks;
   final void Function(double,String)? tap;
 
-  const BuySellWidget({super.key,required this.action,required this.ticker,required this.tap});
+  const BuySellWidget({super.key,required this.action,required this.ticker,this.stocks = 0.0,required this.tap});
 
   @override
   State<BuySellWidget> createState() => BuySellWidgetState();
@@ -67,10 +68,12 @@ class BuySellWidgetState extends State<BuySellWidget> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          (widget.action == MyAction.sell) ? Text("You have ${widget.stocks} stocks") : const SizedBox(),
+            (widget.action == MyAction.sell) ? const SizedBox(height: 20,) : const SizedBox(),
           TextField(
             controller: _controller,
             decoration: InputDecoration(
-              labelText: (widget.action == MyAction.buy) ?'Enter amount to spend' : "Enter amount to sell"
+              labelText: (widget.action == MyAction.buy) ?'Enter amount to spend' : "Enter amount to sell or % to sell"
             ),
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
           ),

@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
+import '../widgets/buttonWidget.dart';
+
 class Helper {
   static void circleDialog(BuildContext context) {
     showDialog(context: context,
@@ -16,13 +18,25 @@ class Helper {
   }
 
   static void messageToUser(String str,BuildContext context) {
-    showDialog(context: context,
-        builder: (context) => Center(
-          child: AlertDialog(
-            title: Text(str),
-          )
-        )
-    );  
+      showDialog(context: context,
+          builder: (context) => Center(
+              child: AlertDialog(
+                  title: Text(str),
+                  actions: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ButtonWidget(
+                            text:"Ok",
+                            tap: () { Navigator.pop(context); }
+                        )
+                      ],
+                    )
+                  ]
+          ),
+        ),
+      );
+
   }
 
   static Future<dynamic?> stockPrice(String ticker) async {

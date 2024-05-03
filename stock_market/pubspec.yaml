@@ -35,9 +35,12 @@ dependencies:
   firebase_auth: ^4.19.1
   cloud_firestore: ^4.16.1
 
-  flutter_riverpod: ^2.5.1
   tab_container: ^3.5.3
   http: ^1.2.1
+
+  flutter_riverpod: ^2.5.1
+
+  fl_chart: ^0.67.0
 
   intl: ^0.19.0
 

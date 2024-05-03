@@ -59,8 +59,10 @@ class FirebaseAdapter {
 
     var doc = await _userData(id);
     var userData = doc.data() as Map<String, dynamic>;
+    var balance = userData["balance"];
+    var invested = userData["invested"];
 
-    UserData data = UserData(id: id,name: userData["username"], email: email, invested: userData["invested"], balance: userData["balance"]);
+    UserData data = UserData(id: id,name: userData["username"], email: email, invested: invested*1.00, balance: balance*1.00);
 
     stocks = await getStocks(id);
 
@@ -188,6 +190,7 @@ class FirebaseAdapter {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       DateTime timeStamp = _timestampFromDb(doc.id);
       MyAction action = (data["action"] == MyAction.buy.name) ? MyAction.buy: MyAction.sell;
+
       MyTransaction t = MyTransaction(
           userId: userId,
           ticker: ticker,
