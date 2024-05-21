@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1350935d-c72b-423d-bb15-6b4213e36db5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/main_dart.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.metadata" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/analysis_options.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/google-services.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/debug/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/kotlin/com/example/stock_market/MainActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-v21/launch_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable/launch_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/values-night/styles.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/profile/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/gradle.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/stock_market_android.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/appLogo/logo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/AAPL.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/AMD.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/AMZN.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/GOLD.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/GOOG.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/IBM.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/INTC.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/KO.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/MCD.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/MNST.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/MSFT.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/MSI.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/NEON.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/NFLX.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/NVDA.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/OSIS.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/PAYS.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/PEP.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/SBUX.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/data/TSLA.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/AAPL_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/AMD_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/AMZN_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/GOLD_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/GOOG_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/IBM_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/INTC_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/KO_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/MCD_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/MNST_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/MSFT_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/MSI_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/NEON_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/NFLX_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/NVDA_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/OSIS_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/PAYS_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/PEP_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/SBUX_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logos/TSLA_Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Flutter/AppFrameworkInfo.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Flutter/Debug.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Flutter/Release.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner.xcworkspace/contents.xcworkspacedata" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/AppDelegate.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Base.lproj/LaunchScreen.storyboard" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Base.lproj/Main.storyboard" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Runner-Bridging-Header.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/RunnerTests/RunnerTests.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/firebase_app_id_file.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/adapter/firebaseAdapter.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/firebase_options.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/helper/helper.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/helper/myTheme.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/managers/userManager.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/appInfo.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/myTransaction.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/stock.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/userData.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/userModel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/state/buySellState.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/state/stockPriceState.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/views/auth/authView.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/views/auth/loginView.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/views/auth/registerView.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/views/stocks/stockView.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/views/stocks/stocksView.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/views/transactions/stockTransactionHistoryView.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/views/wallet/walletView.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/buttonWidget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/buySellWidget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/drawerWidget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/logoWidget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/profileStockWidget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/stockListWidget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/stockWidget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/textFieldWidget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/transactionWidget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/flutter/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/main.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/my_application.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/linux/my_application.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Flutter/Flutter-Debug.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Flutter/Flutter-Release.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner.xcworkspace/contents.xcworkspacedata" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/AppDelegate.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_1024.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_128.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_256.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_64.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/Base.lproj/MainMenu.xib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/Configs/AppInfo.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/Configs/Debug.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/Configs/Release.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/Configs/Warnings.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/DebugProfile.entitlements" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/MainFlutterWindow.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/Runner/Release.entitlements" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/RunnerTests/RunnerTests.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/macos/firebase_app_id_file.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stock_market.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/icons/Icon-192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/icons/Icon-512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/icons/Icon-maskable-192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/icons/Icon-maskable-512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/flutter/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/runner/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/runner/Runner.rc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/runner/flutter_window.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/runner/flutter_window.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/runner/main.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/runner/resource.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/runner/resources/app_icon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/runner/runner.exe.manifest" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/runner/utils.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/runner/utils.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/runner/win32_window.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows/runner/win32_window.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/.metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/analysis_options.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/app/google-services.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/app/src/debug/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/app/src/main/kotlin/com/example/stock_market/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/app/src/main/res/drawable-v21/launch_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/app/src/main/res/drawable/launch_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/app/src/main/res/values-night/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/app/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/app/src/profile/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/android/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/appLogo/logo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/AAPL.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/AMD.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/AMZN.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/GOLD.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/GOOG.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/IBM.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/INTC.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/KO.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/MCD.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/MNST.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/MSFT.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/MSI.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/NEON.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/NFLX.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/NVDA.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/OSIS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/PAYS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/PEP.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/SBUX.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/data/TSLA.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/AAPL_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/AMD_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/AMZN_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/GOLD_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/GOOG_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/IBM_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/INTC_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/KO_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/MCD_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/MNST_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/MSFT_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/MSI_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/NEON_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/NFLX_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/NVDA_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/OSIS_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/PAYS_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/PEP_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/SBUX_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/assets/logos/TSLA_Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Flutter/AppFrameworkInfo.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Flutter/Debug.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Flutter/Release.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Podfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/AppDelegate.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Base.lproj/LaunchScreen.storyboard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Base.lproj/Main.storyboard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/GoogleService-Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/Runner/Runner-Bridging-Header.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/RunnerTests/RunnerTests.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/ios/firebase_app_id_file.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/adapter/firebaseAdapter.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/firebase_options.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/helper/helper.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/helper/myTheme.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/main.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/managers/userManager.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/models/appInfo.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/models/myTransaction.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/models/stock.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/models/userData.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/models/userModel.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/state/buySellState.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/state/stockPriceState.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/views/auth/authView.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/views/auth/loginView.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/views/auth/registerView.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/views/stocks/stockView.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/views/stocks/stocksView.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/views/transactions/stockTransactionHistoryView.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/views/wallet/walletView.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/widgets/buttonWidget.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/widgets/buySellWidget.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/widgets/drawerWidget.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/widgets/logoWidget.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/widgets/profileStockWidget.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/widgets/stockListWidget.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/widgets/stockWidget.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/widgets/textFieldWidget.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/lib/widgets/transactionWidget.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/linux/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/linux/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/linux/flutter/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/linux/flutter/generated_plugin_registrant.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/linux/flutter/generated_plugins.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/linux/main.cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/linux/my_application.cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/linux/my_application.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Flutter/Flutter-Debug.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Flutter/Flutter-Release.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Podfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Podfile.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/AppDelegate.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_1024.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_128.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_256.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/Base.lproj/MainMenu.xib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/Configs/AppInfo.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/Configs/Debug.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/Configs/Release.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/Configs/Warnings.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/DebugProfile.entitlements" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/GoogleService-Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/MainFlutterWindow.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/Runner/Release.entitlements" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/RunnerTests/RunnerTests.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/macos/firebase_app_id_file.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/pubspec.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/server/.dockerignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/server/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/server/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/server/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/server/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/server/app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/server/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/server/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/test/widget_test.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/web/favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/web/icons/Icon-192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/web/icons/Icon-512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/web/icons/Icon-maskable-192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/web/icons/Icon-maskable-512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/web/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/web/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/flutter/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/flutter/generated_plugin_registrant.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/flutter/generated_plugins.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/runner/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/runner/Runner.rc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/runner/flutter_window.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/runner/flutter_window.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/runner/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/runner/resource.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/runner/resources/app_icon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/runner/runner.exe.manifest" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/runner/utils.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/runner/utils.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/runner/win32_window.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock_market/windows/runner/win32_window.h" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "Rework",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
+      <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1350935d-c72b-423d-bb15-6b4213e36db5" name="Changes" comment="" />
+      <created>1716303355825</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716303355825</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>
