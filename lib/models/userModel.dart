@@ -12,19 +12,17 @@ class UserModel {
   final StockList stocks;
   final Stock? selectedStock;
   final TransactionList transactions;
-  final double stockPrice;
 
-  UserModel({required this.data,required this.stocks,required this.selectedStock,required this.transactions,required this.stockPrice});
+  UserModel({required this.data,required this.stocks,required this.selectedStock,required this.transactions});
 
-  UserModel.empty() : data = UserData.empty(),stocks = HashMap(),selectedStock= null,transactions = [],stockPrice = 0.00;
+  UserModel.empty() : data = UserData.empty(),stocks = HashMap(),selectedStock= null,transactions = [];
 
-  UserModel copyWith({UserData? data,StockList? stocks,Stock? selectedStock,TransactionList? transactions,double? stockPrice}) {
+  UserModel copyWith({UserData? data,StockList? stocks,Stock? selectedStock,TransactionList? transactions}) {
     return UserModel(
         selectedStock: selectedStock??this.selectedStock,
         data: data??this.data,
         stocks: stocks??this.stocks,
         transactions: transactions??this.transactions,
-        stockPrice: stockPrice??this.stockPrice
     );
   }
 

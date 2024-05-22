@@ -6,13 +6,12 @@ import 'package:stock_market/models/userModel.dart';
 import 'package:stock_market/widgets/logoWidget.dart';
 import 'package:stock_market/widgets/transactionWidget.dart';
 
+import '../../managers/stockPriceManager.dart';
 import '../../models/stock.dart';
 import '../../widgets/buttonWidget.dart';
 import '../../helper/helper.dart';
 import '../../managers/userManager.dart';
-import '../../models/appInfo.dart';
 import '../../state/buySellState.dart';
-import '../../widgets/stockWidget.dart';
 
 class StockTransactionHistoryView extends ConsumerStatefulWidget{
   const StockTransactionHistoryView({super.key});
@@ -22,8 +21,7 @@ class StockTransactionHistoryView extends ConsumerStatefulWidget{
 
 }
 
-class _StockTransactionHistoryViewState extends BuySellWitTickerConsumerState<StockTransactionHistoryView> {
-  late Timer _timer;
+class _StockTransactionHistoryViewState extends BuySellConsumerState<StockTransactionHistoryView> {
   late Stock stock = Stock.empty("","","");
   late TransactionList transactions = [];
 
@@ -33,30 +31,11 @@ class _StockTransactionHistoryViewState extends BuySellWitTickerConsumerState<St
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final m = ref.watch(userManager);
+
       stock = m.selectedStock!;
       transactions = m.transactions;
-
-      updatePrice(m.stockPrice);
-
-      stockData(stock.ticker);
-
-      _timer = Timer.periodic(const Duration(milliseconds: REFRESH_TIME), (timer) {
-        buySellWidgetState.currentState?.getPrice();
-        getPrice();
-      });
-
     });
 
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
-
-  Future<void> stockData(String ticker) async {
-    await setTicker(ticker);
   }
 
   dynamic transactionList(TransactionList  data) {
@@ -74,11 +53,13 @@ class _StockTransactionHistoryViewState extends BuySellWitTickerConsumerState<St
   @override
   Widget build(BuildContext context) {
     const buttonWidth = 160.0;
+    final stocks = ref.watch(stockPriceManager);
+    final ticker = stock.ticker;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("${stock.ticker} transaction data"),
+        title: Text("$ticker transaction data"),
       ),
       body: Column(
         children: [
@@ -107,8 +88,8 @@ class _StockTransactionHistoryViewState extends BuySellWitTickerConsumerState<St
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const SizedBox(width: 5,),
-              StockButtonWidget.buy(text: Helper.formatCurrency(price), tap: () { buy(ticker,price); },width: buttonWidth,),
-              StockButtonWidget.sell(text: Helper.formatCurrency(price), tap: () { buy(ticker,price); },width: buttonWidth,),
+              StockButtonWidget.buy(text: Helper.formatCurrency(stocks[ticker]!), tap: () { buy(ticker,stocks[ticker]!); },width: buttonWidth,),
+              StockButtonWidget.sell(text: Helper.formatCurrency(stocks[ticker]!), tap: () { sell(ticker,stocks[ticker]!,stock.stocks); },width: buttonWidth,),
               const SizedBox(width: 10,),
             ],
           ),

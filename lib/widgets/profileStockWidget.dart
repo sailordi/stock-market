@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:stock_market/helper/helper.dart';
 import 'package:stock_market/widgets/buttonWidget.dart';
 import 'package:stock_market/widgets/logoWidget.dart';
 
+import '../managers/stockPriceManager.dart';
 import '../models/stock.dart';
-import '../state/stockPriceState.dart';
 
-class ProfileStockWidget extends StatefulWidget {
+class ProfileStockWidget extends ConsumerStatefulWidget {
   final Stock s;
   final void Function(String ticker,double price)? buy;
   final void Function(String ticker,double price,double stocks)? sell;
@@ -17,17 +18,19 @@ class ProfileStockWidget extends StatefulWidget {
   const ProfileStockWidget({super.key,required this.s,required this.history,required this.buy,required this.sell});
 
   @override
-  State<ProfileStockWidget> createState() => ProfileStockWidgetState(ticker: s.ticker);
+  ConsumerState<ConsumerStatefulWidget> createState() => ProfileStockWidgetState();
 
 }
 
-class ProfileStockWidgetState extends StockPriceState<ProfileStockWidget> {
+class ProfileStockWidgetState extends ConsumerState<ProfileStockWidget> {
 
-  ProfileStockWidgetState({required super.ticker});
+  ProfileStockWidgetState();
 
   @override
   Widget build(BuildContext context) {
     double width = 100.0;
+    final stocks = ref.watch(stockPriceManager);
+    final ticker = widget.s.ticker;
 
     return Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -46,7 +49,7 @@ class ProfileStockWidgetState extends StockPriceState<ProfileStockWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  StockButtonWidget.buy(text: Helper.formatCurrency(price),tap:() { widget.buy!(widget.s.ticker,price); },width: width,),
+                  StockButtonWidget.buy(text: Helper.formatCurrency(stocks[ticker]!),tap:() { widget.buy!(widget.s.ticker,stocks[ticker]!); },width: width,),
                   const SizedBox(width: 10,),
                 ],
               ),
@@ -63,7 +66,7 @@ class ProfileStockWidgetState extends StockPriceState<ProfileStockWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  StockButtonWidget.sell(text: Helper.formatCurrency(price),tap:() { widget.sell!(widget.s.ticker,price,widget.s.stocks); },width: width,),
+                  StockButtonWidget.sell(text: Helper.formatCurrency(stocks[ticker]!),tap:() { widget.sell!(widget.s.ticker,stocks[ticker]!,widget.s.stocks); },width: width,),
                   const SizedBox(width: 10,),
                 ],
               ),

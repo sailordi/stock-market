@@ -131,13 +131,13 @@ class UserManager extends StateNotifier<UserModel> {
     return  (false,"Sold ${t.stocks} $ticker for ${t.amount}\$");
   }
 
-  Future<void> selectStock(String ticker,double price) async {
+  Future<void> selectStock(String ticker) async {
     print("Select stock: $ticker");
     //TODO Real transaction
     var transactions = await firebaseA.getTransactions(state.data.id!,ticker);
     //var transactions = await firebaseA.mocTransactions(s.userId,s.ticker);
 
-    state = state.copyWith(selectedStock: state.stocks[ticker],transactions: transactions,stockPrice: price);
+    state = state.copyWith(selectedStock: state.stocks[ticker],transactions: transactions);
   }
 
 }

@@ -2,7 +2,6 @@ import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:intl/intl.dart';
 
 import '../models/userData.dart';
 import '../models/stock.dart';
@@ -66,7 +65,7 @@ class FirebaseAdapter {
 
     stocks = await getStocks(id);
 
-    UserModel ret = UserModel(data: data, stocks: stocks, selectedStock: null, transactions: [],stockPrice: 0.00);
+    UserModel ret = UserModel(data: data, stocks: stocks, selectedStock: null, transactions: []);
 
     return ret;
   }
@@ -103,7 +102,7 @@ class FirebaseAdapter {
     stocks[ticker1] = s1;
     stocks[ticker2] = s2;
 
-    return UserModel(data: data, stocks: stocks, selectedStock: null, transactions: [],stockPrice: 0.00);
+    return UserModel(data: data, stocks: stocks, selectedStock: null, transactions: []);
   }
 
   Future<List<MyTransaction> > mocTransactions(String userId,String ticker) async {

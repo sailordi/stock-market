@@ -23,49 +23,14 @@ class StockListWidget extends ConsumerStatefulWidget {
 }
 
 class _StockListWidgetState extends BuySellConsumerState<StockListWidget> {
-  late Timer _timer;
-  late List<GlobalKey<StockWidgetState> > _stockKeys;
-  late List<GlobalKey<ProfileStockWidgetState> > _profileKeys;
 
   @override
   void initState() {
     super.initState();
-
-    if(widget.tickers != null) {
-      _profileKeys = [];
-      _stockKeys = List.generate(widget.tickers!.length, (index) => GlobalKey<StockWidgetState>() );
-
-      _timer = Timer.periodic(const Duration(milliseconds: REFRESH_TIME), (timer) {
-        buySellWidgetState.currentState?.getPrice();
-        for (var key in _stockKeys) {
-          key.currentState?.getPrice();
-        }
-
-      });
-    }
-    else {
-      _stockKeys = [];
-      _profileKeys = List.generate(widget.stocks!.length, (index) => GlobalKey<ProfileStockWidgetState>() );
-
-      _timer = Timer.periodic(const Duration(milliseconds: REFRESH_TIME), (timer) {
-        buySellWidgetState.currentState?.getPrice();
-        for (var key in _profileKeys) {
-          key.currentState?.getPrice();
-        }
-      });
-    }
-
   }
 
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
-
-  void stockTransactionHistory(String ticker,double price) async {
-    print("Stock history: $ticker");
-    await ref.read(userManager.notifier).selectStock(ticker,price);
+  void stockTransactionHistory(String ticker) async {
+    await ref.read(userManager.notifier).selectStock(ticker);
 
     if(mounted) {
       Navigator.pushNamed(context,"/stockTransactions");
@@ -84,7 +49,6 @@ class _StockListWidgetState extends BuySellConsumerState<StockListWidget> {
           itemCount: data.length,
           itemBuilder: (context,index) {
             return StockWidget(
-                key: _stockKeys[index],
                 ticker: data[index],
                 history: () { Helper.stockHistoryPage(context,data[index]); },
                 buy: buy,
@@ -104,11 +68,10 @@ class _StockListWidgetState extends BuySellConsumerState<StockListWidget> {
           itemCount: data.length,
           itemBuilder: (context,index) {
             return ProfileStockWidget(
-                key: _profileKeys[index],
                 s: data[index],
                 buy: buy,
                 sell: sell,
-                history: () { stockTransactionHistory(data[index].ticker,_profileKeys[index].currentState!.price); }
+                history: () { stockTransactionHistory(data[index].ticker); }
             );
           }
       );
