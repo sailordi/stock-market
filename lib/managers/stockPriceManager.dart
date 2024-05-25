@@ -1,14 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:stock_market/helper/helper.dart';
 
+import '../adapters/downloadAdapter.dart';
 import '../models/appInfo.dart';
 
 typedef TickersPrices = Map<String, double>;
 
 class StockPriceManager extends StateNotifier<TickersPrices> {
   late Timer? _timer;
+  final DownloadAdapter _downloadA = DownloadAdapter();
 
   StockPriceManager(super.initialStocks) {
     _startTimer();
@@ -32,8 +33,9 @@ class StockPriceManager extends StateNotifier<TickersPrices> {
     TickersPrices updatedStocks = {};
 
     for (var symbol in symbols) {
-      final price = await Helper.stockPrice(symbol);
-      updatedStocks[symbol] = price;
+      await _downloadA.getPrice(symbol,(String ticker,double price) {
+        updatedStocks[ticker] = price;
+      });
     }
 
     state = updatedStocks;

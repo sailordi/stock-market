@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:stock_market/models/myTransaction.dart';
-import 'package:stock_market/widgets/buttonWidget.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/myTransaction.dart';
+import '../widgets/buttonWidget.dart';
 import '../helper/helper.dart';
+import '../managers/stockPriceManager.dart';
 
-class BuySellWidget extends StatefulWidget {
+class BuySellWidget extends ConsumerStatefulWidget  {
   final MyAction action;
   final String ticker;
   final double stocks;
@@ -13,47 +15,21 @@ class BuySellWidget extends StatefulWidget {
   const BuySellWidget({super.key,required this.action,required this.ticker,this.stocks = 0.0,required this.tap});
 
   @override
-  State<BuySellWidget> createState() => BuySellWidgetState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _BuySellWidgetState();
 
 }
 
-class BuySellWidgetState extends State<BuySellWidget> {
+class _BuySellWidgetState extends ConsumerState<BuySellWidget> {
   final TextEditingController _controller = TextEditingController();
-  double price = 0.0;
 
-  @override
-  void initState() {
-    super.initState();
-
-    getPrice();
-
-  }
-
-  String formatNumber() {
-    String ret = price.toStringAsFixed(2);
-
-    return ret;
-  }
-
-  Future<void> getPrice() async {
-    var data = await Helper.stockPrice(widget.ticker);
-
-    if (mounted) {
-      setState(() {
-        price = data["rate"];
-      });
-    }
-
-  }
-
-  String title() {
+  String title(double price) {
     String ret = '';
 
     if(widget.action == MyAction.buy) {
-      ret = "Buy ${widget.ticker}\nfor\n${formatNumber()}\$ per stock";
+      ret = "Buy ${widget.ticker}\nfor\n${Helper.formatCurrency(price)} per stock";
     }
     else {
-      ret = "Sell ${widget.ticker}\nfor\n${formatNumber()}\$ per stock";
+      ret = "Sell ${widget.ticker}\nfor\n${Helper.formatCurrency(price)} per stock";
     }
 
     return ret;
@@ -61,8 +37,11 @@ class BuySellWidgetState extends State<BuySellWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final stocks = ref.watch(stockPriceManager);
+    var price = stocks[widget.ticker];
+
     return AlertDialog(
-      title: Text(title(),
+      title: Text(title(price!),
         textAlign: TextAlign.center,
       ),
       content: Column(

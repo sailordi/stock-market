@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stock_market/models/userData.dart';
 
+import '../adapters/firebaseAdapter.dart';
 import '../models/appInfo.dart';
-import '../adapter/firebaseAdapter.dart';
 import '../models/myTransaction.dart';
 import '../models/userModel.dart';
 import '../models/stock.dart';

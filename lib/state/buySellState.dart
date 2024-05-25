@@ -7,8 +7,6 @@ import '../models/myTransaction.dart';
 import '../widgets/buySellWidget.dart';
 
 abstract class BuySellConsumerState<T extends ConsumerStatefulWidget> extends ConsumerState<T> {
-  final GlobalKey<BuySellWidgetState> buySellWidgetState = GlobalKey<BuySellWidgetState>();
-
   void preformBuy(String id,String ticker,double price,double amount) async {
     MyTransaction t = MyTransaction.buy(
         userId:id,
@@ -51,7 +49,6 @@ abstract class BuySellConsumerState<T extends ConsumerStatefulWidget> extends Co
 
   void buy(String ticker,double price) {
     BuySellWidget w = BuySellWidget(
-        key: buySellWidgetState,
         action: MyAction.buy,
         ticker: ticker,
         tap: (double price,String amount) {
@@ -81,7 +78,6 @@ abstract class BuySellConsumerState<T extends ConsumerStatefulWidget> extends Co
 
   void sell(String ticker,double price,double stocks) {
     BuySellWidget w = BuySellWidget(
-        key: buySellWidgetState,
         action: MyAction.sell,
         ticker: ticker,
         stocks:stocks,

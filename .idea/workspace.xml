@@ -11,17 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1350935d-c72b-423d-bb15-6b4213e36db5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/adapter/firebaseAdapter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/adapter/firebaseAdapter.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/managers/stockPriceManager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/managers/stockPriceManager.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/managers/userManager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/managers/userManager.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/userModel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/userModel.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/state/buySellState.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/state/buySellState.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/state/stockPriceState.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/transactions/stockTransactionHistoryView.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/transactions/stockTransactionHistoryView.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/profileStockWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/profileStockWidget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/stockListWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/stockListWidget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/stockWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/stockWidget.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,10 +36,10 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2gnoNSvmswC0kyTfxCxTZW0o29h" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
