@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:stock_market/models/userModel.dart';
-import 'package:stock_market/widgets/logoWidget.dart';
-import 'package:stock_market/widgets/transactionWidget.dart';
 
+import '../../helper/routes.dart';
 import '../../managers/stockPriceManager.dart';
 import '../../models/stock.dart';
+import '../../models/userModel.dart';
 import '../../widgets/buttonWidget.dart';
 import '../../helper/helper.dart';
 import '../../managers/userManager.dart';
 import '../../state/buySellState.dart';
+import '../../widgets/logoWidget.dart';
+import '../../widgets/transactionWidget.dart';
 
-class StockTransactionHistoryView extends ConsumerStatefulWidget{
+
+
+class StockTransactionHistoryView extends ConsumerStatefulWidget {
   const StockTransactionHistoryView({super.key});
 
   @override
@@ -22,6 +25,9 @@ class StockTransactionHistoryView extends ConsumerStatefulWidget{
 class _StockTransactionHistoryViewState extends BuySellConsumerState<StockTransactionHistoryView> {
   late Stock stock = Stock.empty("","","");
   late TransactionList transactions = [];
+  late double price = 0.00;
+  late String ticker = "";
+  late List<dynamic> history = [];
 
   @override
   void initState() {
@@ -29,10 +35,22 @@ class _StockTransactionHistoryViewState extends BuySellConsumerState<StockTransa
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final m = ref.watch(userManager);
+      final stockPrices = ref.watch(stockPriceManager);
 
       stock = m.selectedStock!;
       transactions = m.transactions;
+      ticker = stock.ticker;
+      price = stockPrices[ticker]!;
     });
+
+  }
+
+  void stockHistoryPage(String ticker) async {
+    await ref.read(userManager.notifier).selectStockHistory(ticker);
+
+    if(mounted) {
+      Navigator.pushNamed(context,Routes.stockHistory() );
+    }
 
   }
 
@@ -51,8 +69,7 @@ class _StockTransactionHistoryViewState extends BuySellConsumerState<StockTransa
   @override
   Widget build(BuildContext context) {
     const buttonWidth = 160.0;
-    final stocks = ref.watch(stockPriceManager);
-    final ticker = stock.ticker;
+
 
     return Scaffold(
       appBar: AppBar(
@@ -71,7 +88,7 @@ class _StockTransactionHistoryViewState extends BuySellConsumerState<StockTransa
                   Text(ticker),
                   Text("Name: ${stock.name}",),
                   const SizedBox(height: 3,),
-                  LogoWidget(ticker: ticker, history: () { Helper.stockHistoryPage(context, ticker); },tickerOverLogo: false,height: 90,),
+                  LogoWidget(ticker: ticker, history: () { stockHistoryPage(ticker); },tickerOverLogo: false,height: 90,),
                   const SizedBox(height: 5,),
                   Text("Stocks: ${stock.stocks}"),
                   const SizedBox(height: 5,),
@@ -86,8 +103,8 @@ class _StockTransactionHistoryViewState extends BuySellConsumerState<StockTransa
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const SizedBox(width: 5,),
-              StockButtonWidget.buy(text: Helper.formatCurrency(stocks[ticker]!), tap: () { buy(ticker,stocks[ticker]!); },width: buttonWidth,),
-              StockButtonWidget.sell(text: Helper.formatCurrency(stocks[ticker]!), tap: () { sell(ticker,stocks[ticker]!,stock.stocks); },width: buttonWidth,),
+              StockButtonWidget.buy(text: Helper.formatCurrency(price), tap: () { buy(ticker,price); },width: buttonWidth,),
+              StockButtonWidget.sell(text: Helper.formatCurrency(price), tap: () { sell(ticker,price,stock.stocks); },width: buttonWidth,),
               const SizedBox(width: 10,),
             ],
           ),

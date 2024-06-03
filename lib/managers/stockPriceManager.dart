@@ -22,6 +22,7 @@ class StockPriceManager extends StateNotifier<TickersPrices> {
   }
 
   void _startTimer() {
+    _fetchPrices();
     _timer = Timer.periodic(const Duration(milliseconds: REFRESH_TIME), (timer) {
       _fetchPrices();
     });

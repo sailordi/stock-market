@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:stock_market/helper/helper.dart';
 import 'package:tab_container/tab_container.dart';
 
 import '../../managers/userManager.dart';
 import '../../models/stock.dart';
 import '../../models/userData.dart';
+import '../../helper/helper.dart';
 import '../../widgets/stockListWidget.dart';
 
 class WalletView extends ConsumerStatefulWidget {
@@ -145,8 +145,8 @@ class _WalletViewState extends ConsumerState<WalletView> with SingleTickerProvid
     List<Stock> inactive = [];
 
     if(tickers.isNotEmpty) {
-      active = uM.stocks.values.where((s) => s.stocks > 0).toList();
-      inactive = uM.stocks.values.where((s) => s.stocks <= 0).toList();
+      active = uM.stocks.values.where((s) => s.stocks > 0 && s.tmp == false).toList();
+      inactive = uM.stocks.values.where((s) => s.stocks <= 0 && s.tmp == false).toList();
     }
 
     return Scaffold(

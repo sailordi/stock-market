@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../helper/routes.dart';
 import '../managers/userManager.dart';
 
 
@@ -54,7 +55,7 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                     onTap: () {
                       Navigator.pop(context);
 
-                      Navigator.pushNamed(context,"/wallet");
+                      Navigator.pushNamed(context,Routes.wallet() );
                     },
                   ),
                 )
@@ -70,7 +71,7 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                 onTap: () {
                   Navigator.pop(context);
                   ref.read(userManager.notifier).logOut();
-                  Navigator.pushReplacementNamed(context,"/");
+                  Navigator.pushReplacementNamed(context,Routes.auth() );
                 },
               ),
             )

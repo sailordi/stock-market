@@ -1,8 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:stock_market/helper/routes.dart';
 
+import '../managers/userManager.dart';
 import '../widgets/buttonWidget.dart';
 
 class Helper {
@@ -46,13 +49,6 @@ class Helper {
     DateFormat formatter = DateFormat('dd-MM-yyyy HH:mm:ss');
 
     return formatter.format(t);
-  }
-
-  static void stockHistoryPage(BuildContext context,String ticker) {
-    Navigator.pushNamed(context,
-        arguments: ticker,
-        "/stock"
-    );
   }
 
 }

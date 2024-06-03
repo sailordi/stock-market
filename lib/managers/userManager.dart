@@ -60,7 +60,9 @@ class UserManager extends StateNotifier<UserModel> {
 
     s = s.copyWith(invested: s.invested+t.amount,stocks: s.stocks+t.stocks);
 
-    if(uM.selectedStock != null && t.ticker == uM.selectedStock!.ticker) {
+    final selS = uM.selectedStock;
+
+    if(selS != null && t.ticker == selS.ticker) {
       uM.transactions.add(t);
       sel = true;
     }
@@ -80,7 +82,7 @@ class UserManager extends StateNotifier<UserModel> {
 
     if(!sel) {
       state = state.copyWith(data: u, stocks: uM.stocks);
-    }else {
+    } else {
       state = state.copyWith(data: u, stocks: uM.stocks,selectedStock: s,transactions: uM.transactions);
     }
 
@@ -132,12 +134,20 @@ class UserManager extends StateNotifier<UserModel> {
   }
 
   Future<void> selectStock(String ticker) async {
-    print("Select stock: $ticker");
-    //TODO Real transaction
     var transactions = await firebaseA.getTransactions(state.data.id!,ticker);
-    //var transactions = await firebaseA.mocTransactions(s.userId,s.ticker);
 
     state = state.copyWith(selectedStock: state.stocks[ticker],transactions: transactions);
+  }
+
+  Future<void> selectStockHistory(String ticker) async {
+    var stocks = state.stocks;
+
+    if(stocks.containsKey(ticker) == false) {
+      state = state.copyWith(selectedStock: Stock(userId: state.data.id!,ticker: ticker, name: Stocks[ticker]!,tmp: true) );
+    }else {
+      state = state.copyWith(selectedStock: state.stocks[ticker]);
+    }
+
   }
 
 }

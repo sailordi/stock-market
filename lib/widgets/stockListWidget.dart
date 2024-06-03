@@ -7,8 +7,8 @@ import 'package:stock_market/widgets/profileStockWidget.dart';
 import 'package:stock_market/widgets/stockWidget.dart';
 
 import '../helper/helper.dart';
+import '../helper/routes.dart';
 import '../managers/userManager.dart';
-import '../models/appInfo.dart';
 import '../models/stock.dart';
 
 class StockListWidget extends ConsumerStatefulWidget {
@@ -33,7 +33,16 @@ class _StockListWidgetState extends BuySellConsumerState<StockListWidget> {
     await ref.read(userManager.notifier).selectStock(ticker);
 
     if(mounted) {
-      Navigator.pushNamed(context,"/stockTransactions");
+      Navigator.pushNamed(context,Routes.stocksTransactions() );
+    }
+
+  }
+
+  void stockHistoryPage(String ticker) async {
+    await ref.read(userManager.notifier).selectStockHistory(ticker);
+
+    if(mounted) {
+      Navigator.pushNamed(context,Routes.stockHistory() );
     }
 
   }
@@ -50,7 +59,7 @@ class _StockListWidgetState extends BuySellConsumerState<StockListWidget> {
           itemBuilder: (context,index) {
             return StockWidget(
                 ticker: data[index],
-                history: () { Helper.stockHistoryPage(context,data[index]); },
+                history: () { stockHistoryPage(data[index]); },
                 buy: buy,
                 sell: sell,
                 stocks: (stocks.containsKey(data[index]) ) ? stocks[data[index]]!.stocks : 0.00

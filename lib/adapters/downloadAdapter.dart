@@ -28,10 +28,23 @@ class DownloadAdapter {
       set(ticker,data["rate"]);
   }
 
-  Future<void> getPriceHistory(String ticker,Function(List<dynamic>) set) async {
+  Future<List<(double,DateTime)> > getPriceHistory(String ticker,) async {
     var data = await _fetchPriceHistory(ticker);
+    var values = data['values'] as List<dynamic>;
+    DateFormat dateFormat = DateFormat("EEE, dd MMM yyyy HH:mm:ss 'GMT'");
 
-      set(data['values']);
+      List<(double,DateTime)> ret = [];
+
+      for(var data in values) {
+        var c = data["close"] as double;
+        var d = data["date"] as String;
+
+        ret.add((c,dateFormat.parseUTC(d) ));
+      }
+
+      print(ret);
+
+      return ret;
   }
 
   Future<dynamic> _fetchStockPrice(String ticker) async {

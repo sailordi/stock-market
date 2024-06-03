@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stock_market/firebase_options.dart';
 import 'package:stock_market/helper/myTheme.dart';
+import 'package:stock_market/helper/routes.dart';
 import 'package:stock_market/views/auth/authView.dart';
 import 'package:stock_market/views/wallet/walletView.dart';
 import 'package:stock_market/views/stocks/stockView.dart';
@@ -20,13 +21,13 @@ void main() async{
           title: 'Stock market',
           theme: MyTheme.lightMode(),
           darkTheme: MyTheme.darkMode(),
-          initialRoute: "/",
+          initialRoute: Routes.auth(),
           routes: {
-            "/": (context) => const AuthView(),
-            "/wallet": (context) => const WalletView(),
-            "/stock": (context) => const StockView(),
-            "/stocks": (context) => const StocksView(),
-            "/stockTransactions": (context) => const StockTransactionHistoryView()
+            Routes.auth(): (context) => const AuthView(),
+            Routes.wallet(): (context) => const WalletView(),
+            Routes.stockHistory(): (context) => const StockView(),
+            Routes.stocks(): (context) => const StocksView(),
+            Routes.stocksTransactions(): (context) => const StockTransactionHistoryView()
           },
           debugShowCheckedModeBanner: false,
         )
