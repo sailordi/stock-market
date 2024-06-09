@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:stock_market/models/stockHistoryData.dart';
+import 'package:stock_market/widgets/chartWidget.dart';
 
 import '../../adapters/downloadAdapter.dart';
 import '../../helper/helper.dart';
-import '../../helper/routes.dart';
 import '../../managers/stockPriceManager.dart';
 import '../../managers/userManager.dart';
-import '../../models/appInfo.dart';
 import '../../models/stock.dart';
 import '../../state/buySellState.dart';
 import '../../widgets/buttonWidget.dart';
@@ -26,7 +25,7 @@ class _StockViewState extends BuySellConsumerState<StockView> {
   late UserManager uM;
   late double  price = 0.00;
   late String ticker = "";
-  List<(double,DateTime)> data = [];
+  List<StockHistoryData> data = [];
 
 
   @override
@@ -93,21 +92,6 @@ class _StockViewState extends BuySellConsumerState<StockView> {
     data = await _downloadA.getPriceHistory(ticker);
   }
 
-  dynamic chart() {
-    return SfCartesianChart(
-      primaryXAxis: const DateTimeAxis(),
-      series: <CartesianSeries>[
-          // Renders line chart
-          LineSeries<(double,DateTime), DateTime>(
-          dataSource: data,
-          xValueMapper: ( (double,DateTime) d, _) => d.$2,
-          yValueMapper: ( (double,DateTime) d, _) => d.$1
-        )
-      ]
-    );
-
-  }
-
   @override
   Widget build(BuildContext context) {
     const buttonWidth = 160.0;
@@ -131,7 +115,7 @@ class _StockViewState extends BuySellConsumerState<StockView> {
             ],
           ),
           const SizedBox(height: 20,),
-          chart()
+          ChartWidget(data: data)
         ],
       )
     );

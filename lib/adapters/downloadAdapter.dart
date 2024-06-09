@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io' show Platform;
 import 'package:http/http.dart' as http;
+import 'package:stock_market/models/stockHistoryData.dart';
 import 'package:intl/intl.dart';
 
 class DownloadAdapter {
@@ -28,21 +29,17 @@ class DownloadAdapter {
       set(ticker,data["rate"]);
   }
 
-  Future<List<(double,DateTime)> > getPriceHistory(String ticker,) async {
+  Future<List<StockHistoryData> > getPriceHistory(String ticker,) async {
     var data = await _fetchPriceHistory(ticker);
     var values = data['values'] as List<dynamic>;
-    DateFormat dateFormat = DateFormat("EEE, dd MMM yyyy HH:mm:ss 'GMT'");
-
-      List<(double,DateTime)> ret = [];
+      List<StockHistoryData> ret = [];
 
       for(var data in values) {
         var c = data["close"] as double;
         var d = data["date"] as String;
 
-        ret.add((c,dateFormat.parseUTC(d) ));
+        ret.add(StockHistoryData(price: c, dateStr: d) );
       }
-
-      print(ret);
 
       return ret;
   }

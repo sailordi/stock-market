@@ -13,6 +13,9 @@ doc/api/
 
 .DS_Store
 
+google-services.json
+firebase_options.dart
+
 # dotenv environment variables file
 .env*
 
